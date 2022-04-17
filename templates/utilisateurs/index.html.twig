@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateurs index{% endblock %}
+
+{% block body %}
+<div class ="row" style="display: flex;align-items: center;justify-content: center">
+<div class="col-lg-6">
+    <div class="card"style="width: 2000px">
+        <div class="card-body">
+            <h5 class="card-title"STYLE="padding-top: 100px">liste des utilisateurs</h5>
+
+            <!-- Table with stripped rows -->
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Numeroutilisateurs</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Motdepasse</th>
+                    <th scope="col">Dateinscription</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Username</th>
+                    {# <th scope="col">Nomadmin</th>#}
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Infocartebancaire</th>
+                    <th scope="col">Numtel</th>
+                    <th scope="col">actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for utilisateur in utilisateurs %}
+                    <tr>
+
+                        <td>{{ utilisateur.numeroutilisateurs }}</td>
+                        <td>{{ utilisateur.email }}</td>
+                        <td>{{ utilisateur.motdepasse }}</td>
+                        <td>{{ utilisateur.dateinscription ? utilisateur.dateinscription|date('Y-m-d') : '' }}</td>
+                        <td>{{ utilisateur.role }}</td>
+                        <td>{{ utilisateur.nomclient }}</td>
+                       {#  <td>{{ utilisateur.nomadmin }}</td>#}
+                        <td>{{ utilisateur.adresse }}</td>
+                        <td>{{ utilisateur.infocartebancaire }}</td>
+                        <td>{{ utilisateur.numtel }}</td>
+                        <td>
+                            <a href="{{ path('app_utilisateurs_show', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}">show</a>
+                            <a href="{{ path('app_utilisateurs_edit', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="11">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {# <a style="display:flex;align-items: center;justify-content: center"href="{{ path('app_utilisateurs_new') }}">Create new client</a> #}
+            <a style="display:flex;align-items: center;justify-content: center"href="{{ path('app_utilisateurs_newA') }}">Create new admin</a>
+            <!-- End Table with stripped rows -->
+
+
+
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

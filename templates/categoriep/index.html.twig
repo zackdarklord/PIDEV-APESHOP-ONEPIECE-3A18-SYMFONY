@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categoriep index{% endblock %}
+
+{% block body %}
+    <h1>Categoriep index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idcategorie</th>
+                <th>Nomcategorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categoriep in categorieps %}
+            <tr>
+                <td>{{ categoriep.idcategorie }}</td>
+                <td>{{ categoriep.nomcategorie }}</td>
+                <td>
+                    <a href="{{ path('app_categoriep_show', {'idcategorie': categoriep.idcategorie}) }}">show</a>
+                    <a href="{{ path('app_categoriep_edit', {'idcategorie': categoriep.idcategorie}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categoriep_new') }}">Create new</a>
+{% endblock %}

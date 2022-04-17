@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categoriea index{% endblock %}
+
+{% block body %}
+    <h1>Categoriea index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idcategorie</th>
+                <th>Nomcategorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categoriea in categorieas %}
+            <tr>
+                <td>{{ categoriea.idcategorie }}</td>
+                <td>{{ categoriea.nomcategorie }}</td>
+                <td>
+                    <a href="{{ path('app_categoriea_show', {'idcategorie': categoriea.idcategorie}) }}">show</a>
+                    <a href="{{ path('app_categoriea_edit', {'idcategorie': categoriea.idcategorie}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categoriea_new') }}">Create new</a>
+{% endblock %}

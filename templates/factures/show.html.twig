@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Factures{% endblock %}
+
+{% block body %}
+    <h1>Factures</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Numerofacture</th>
+                <td>{{ facture.numerofacture }}</td>
+            </tr>
+            <tr>
+                <th>Typelivraison</th>
+                <td>{{ facture.typelivraison }}</td>
+            </tr>
+            <tr>
+                <th>Prixlivraison</th>
+                <td>{{ facture.prixlivraison }}</td>
+            </tr>
+            <tr>
+                <th>Numeroregiondestinataire</th>
+                <td>{{ facture.numeroregiondestinataire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_factures_index') }}">back to list</a>
+
+    <a href="{{ path('app_factures_edit', {'numerofacture': facture.numerofacture}) }}">edit</a>
+
+    {{ include('factures/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,100 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}Paniers index{% endblock %}
+{% block header %}{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block body %}
+    <!-- <h1>Mon Panier</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numeropanier</th>
+                <th>Quantite</th>
+                <th>Dateajout</th>
+                <th>numProduit</th>
+           {#     <th>nomProduit</th>#}
+                <th>numUtils</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for panier in paniers %}
+            <tr>
+                <td>{{ panier.numeropanier }}</td>
+                <td>{{ panier.quantite }}</td>
+                <td>{{ panier.dateajout ? panier.dateajout|date('Y-m-d') : '' }}</td>
+                <td>{{ panier.numeroproduit.numeroproduit }}</td>
+                {# <td>{{ panier.nomproduit.nomproduit}}</td>#}
+                <td>{{ panier.numeroUtilisateur.numeroutilisateurs}}</td>
+                <td>
+                    <a href="{{ path('app_paniers_show', {'numeropanier': panier.numeropanier}) }}">show</a>
+                    <a href="{{ path('app_paniers_edit', {'numeropanier': panier.numeropanier}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_paniers_new') }}">Create new</a>
+    -->
+    {% set total=0 %}
+
+<div class="card-body pb-0">
+
+    <h5 class="card-title">Mon panier <span>| {{ app.session.get ('username') }}</span></h5>
+
+    <table class="table table-borderless">
+        <thead>
+        <tr>
+            <th scope="col">Preview</th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Qts</th>
+            <th scope="col">date ajout</th>
+            <th scope="col">action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set total=0 %}
+        {% for panier in paniers %}
+            {% if app.session.get ('id_user') ==panier.numeroUtilisateur.numeroUtilisateurs %}
+            {% set total=total+(panier.quantite*panier.numeroproduit.prixunitaire) %}
+            <tr>
+                <td>{{ panier.numeroproduit.image }}</td>
+                {# <td>{{ panier.numeropanier }}</td> #}
+                <td>{{ panier.numeroproduit.nomproduit }}</td>
+                <td>{{ panier.numeroproduit.prixunitaire }}</td>
+                <td>{{ panier.quantite }}</td>
+                <td>{{ panier.dateajout ? panier.dateajout|date('Y-m-d') : '' }}</td>
+                {# <td>{{ panier.numeroproduit.numeroproduit }}</td> #}
+                {# <td>{{ panier.nomproduit.nomproduit}}</td>#}
+               {#  <td>{{ panier.numeroUtilisateur.numeroutilisateurs}}</td>#}
+                <td >
+                     {{ include('paniers/_delete_form.html.twig') }}
+                </td>
+            </tr>
+            {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="bi bi-info-circle me-1"></i>
+       votre Total: {{ total }} DT
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <button class="btn btn-primary" type="button"style="width: 100%">procéder au paiement<br><i class="bi bi-cash-coin"></i></button>
+
+
+
+{% endblock %}

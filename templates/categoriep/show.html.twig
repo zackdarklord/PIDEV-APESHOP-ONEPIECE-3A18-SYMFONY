@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categoriep{% endblock %}
+
+{% block body %}
+    <h1>Categoriep</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idcategorie</th>
+                <td>{{ categoriep.idcategorie }}</td>
+            </tr>
+            <tr>
+                <th>Nomcategorie</th>
+                <td>{{ categoriep.nomcategorie }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categoriep_index') }}">back to list</a>
+
+    <a href="{{ path('app_categoriep_edit', {'idcategorie': categoriep.idcategorie}) }}">edit</a>
+
+    {{ include('categoriep/_delete_form.html.twig') }}
+{% endblock %}
