@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Categoriea{% endblock %}
+
+{% block body %}
+    <h1>Edit Categoriea</h1>
+
+    {{ include('categoriea/_form.html.twig') }}
+
+    <a href="{{ path('app_categoriea_index') }}">back to list</a>
+
+
+{% endblock %}

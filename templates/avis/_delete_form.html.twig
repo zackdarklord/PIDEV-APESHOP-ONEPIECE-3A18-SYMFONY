@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('app_avis_delete', {'idavis': avi.idavis}) }}" >
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avi.idavis) }}">
+    <h6 class="text-lg-right">  <button class="btn btn-primary" style="color:#0a58ca;background-color: initial;border-color: white" >  Supprimer  </button></h6>
+
+</form>

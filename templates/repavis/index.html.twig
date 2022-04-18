@@ -1,0 +1,79 @@
+
+
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <main id="main" class="main">
+
+        <h1 style="color: #0a53be" >Liste des Reponse</h1>
+        <section class="section">
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+
+                        <div class="card-body">
+                            <br>
+                            <table class="table datatable dataTable-table" >
+
+                                <thead>
+                                <tr>
+
+                                    <th scope="col" data-sortable="" style="width: 10%;">
+                                    <a href="#" class="dataTable-sorter"><h4 style="color: #0a53be;font-weight: bolder">Etat</h4></a>
+                                    </th>
+                                    <th scope="col" data-sortable="" style="">
+                                        <a href="#" class="dataTable-sorter"><h4 style="color: #0a53be;font-weight: bolder">Avis</h4></a>
+                                    </th>
+                                    <th scope="col" data-sortable="" style="width: 28%;">
+                                    <a href="#" class="dataTable-sorter"><h4 style="color: #0a53be;font-weight: bolder">Reponse</h4></a>
+                                    </th>
+                                    <th scope="col" data-sortable="" style="width: 8%;">
+                                        <a href="#" class="dataTable-sorter"><h4 style="color: #0a53be;font-weight: bolder">Date</h4></a>
+                                    </th>
+
+                                    <th scope="col" data-sortable="" style="width: 2%;">
+
+                                    </th>
+                                    <th scope="col" data-sortable="" style="width: 2%;">
+
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for repavi in repavis %}
+                                    <tr>
+
+                                        <td>{{ repavi.etat }}</td>
+
+                                        <td>{{ repavi.idavis }}</td>
+                                        <td>{{ repavi.reponse }}</td>
+                                        <td>{{ repavi.dateajout ? repavi.dateajout|date('Y-m-d') : '' }}</td>
+
+                                        <td> <button style="background-color: initial;font-weight: bolder;color: #0a58ca" class="btn btn-primary">
+                                                <a href="{{ path('app_repavis_edit', {'idrep': repavi.idrep}) }}">Modifier</a> </button>
+                                        </td>
+
+
+                                        <td>  {{ include('repavis/_delete_form.html.twig') }}</td>
+                                    </tr>
+
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <br>
+                        </div></div>
+                </div></div>
+    </section>
+
+    </main><!-- End #main -->
+
+{% endblock %}

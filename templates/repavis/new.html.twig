@@ -1,0 +1,10 @@
+
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    {{ include('repavis/_form.html.twig') }}
+
+    <a href="{{ path('app_repavis_index') }}">back to list</a>
+{% endblock %}

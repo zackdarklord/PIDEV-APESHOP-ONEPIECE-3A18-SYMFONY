@@ -1,0 +1,62 @@
+
+
+{% block body %}
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Ajouter une categorie</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">categorie</li>
+                    <li class="breadcrumb-item"><a href="{{ path('app_categoriea_index') }}">list</a></li>
+                    <li class="breadcrumb-item active">ajout</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-6">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Remplir ce formulaire</h5>
+
+                            <!-- General Form Elements -->
+                            {{ form_start(form ,{ attr: {novalidate:'novalidate' } }) }}
+
+                            <div class="row mb-3">
+                                <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Categorie</label>
+                                    <div class="col-sm-10">
+                                        {{ form_widget(form.nomcategorie, { 'attr': {'class':'form-select' } }) }}
+                                        {{ form_errors(form.nomcategorie, { 'attr': {'class':'text-danger' } }) }}
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label"></label>
+                                <div class="col-sm-10">
+
+                                    <button class="btn btn-primary">{{ button_label|default('Sauvegarder') }}</button>
+                                </div>
+                            </div>
+
+                            {{ form_end(form) }}<!-- End General Form Elements -->
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+{% endblock %}
