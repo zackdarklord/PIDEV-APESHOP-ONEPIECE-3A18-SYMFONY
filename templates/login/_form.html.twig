@@ -36,7 +36,7 @@
                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                 {{ form_widget(form.username,{ 'attr':{'class':'form-control'} }) }}
                                 {{ form_errors(form.username,{ 'attr':{'class':'danger-text'} }) }}
-                                <div class="invalid-feedback">Please enter your username.</div>
+
                             </div>
                         </div>
 
@@ -44,7 +44,7 @@
                             <label for="yourPassword" class="form-label">Password</label>
                             {{ form_widget(form.password,{ 'attr':{'class':'form-control'} }) }}
                             {{ form_errors(form.password,{ 'attr':{'class':'danger-text'} }) }}
-                            <div class="invalid-feedback">Please enter your password!</div>
+
                         </div>
 
                         <div class="col-12">
@@ -58,7 +58,7 @@
                         </div>
                         <div class="col-12">
                             <p class="small mb-0">Don't have account? <a href="{{ path('app_utilisateurs_new') }}">Create an account</a></p>
-                           <a href="">Forgot your password?</a>
+                           <a href="{{ path('app_forgot_password_request') }}">Forgot your password?</a>
                         </div>
                         {{ form_end(form) }}
                     </div>

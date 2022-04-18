@@ -52,9 +52,9 @@
 
     </table>
 
-    <a style="display:flex;align-items: center;justify-content: center" href="{{ path('app_utilisateurs_index') }}">back to list</a>
+    <a class="btn-primary" style="display:flex;align-items: center;justify-content: center" href="{{ path('app_utilisateurs_index') }}">back to list</a>
 
-    <a style="display:flex;align-items: center;justify-content: center" href="{{ path('app_utilisateurs_edit', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}">edit</a>
+    <a class="btn-info" style="display:flex;align-items: center;justify-content: center" href="{{ path('app_utilisateurs_edit', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}">edit</a>
 
     {{ include('utilisateurs/_delete_form.html.twig') }}
 {% endblock %}

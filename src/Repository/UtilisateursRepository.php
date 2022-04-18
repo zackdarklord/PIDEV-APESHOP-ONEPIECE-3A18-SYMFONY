@@ -45,22 +45,20 @@ class UtilisateursRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Utilisateurs[] Returns an array of Utilisateurs objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Utilisateurs[] Returns an array of Utilisateurs objects
+      */
+    public function findByUsername($value)
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('u.nomclient LIKE :val')
+            ->orWhere('u.nomadmin LIKE :val')
+            ->setParameter('val', $value.'%')
+            ->orderBy('u.numeroutilisateurs', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
 
     public function findOneByUsername($value): ?Utilisateurs

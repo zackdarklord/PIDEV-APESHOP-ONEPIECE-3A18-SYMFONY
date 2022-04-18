@@ -3,11 +3,19 @@
 {% block title %}Utilisateurs index{% endblock %}
 
 {% block body %}
+
 <div class ="row" style="display: flex;align-items: center;justify-content: center">
 <div class="col-lg-6">
     <div class="card"style="width: 2000px">
-        <div class="card-body">
+        <div class="card-body" >
             <h5 class="card-title"STYLE="padding-top: 100px">liste des utilisateurs</h5>
+            <div class="search-bar" >
+                <form class="search-form d-flex align-items-center" action="{{ path('app_utilisateurs_index_1') }}" method="post">
+                    <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                    <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                </form >
+            </div>
+        </div>
 
             <!-- Table with stripped rows -->
 
@@ -36,14 +44,19 @@
                         <td>{{ utilisateur.motdepasse }}</td>
                         <td>{{ utilisateur.dateinscription ? utilisateur.dateinscription|date('Y-m-d') : '' }}</td>
                         <td>{{ utilisateur.role }}</td>
-                        <td>{{ utilisateur.nomclient }}</td>
-                       {#  <td>{{ utilisateur.nomadmin }}</td>#}
+                         {% if utilisateur.nomclient is null %}
+                        <td>{{ utilisateur.nomadmin }}</td>
+
+                        {% else  %}
+                            <td>{{ utilisateur.nomclient }}</td>
+                            {% endif %}
                         <td>{{ utilisateur.adresse }}</td>
                         <td>{{ utilisateur.infocartebancaire }}</td>
                         <td>{{ utilisateur.numtel }}</td>
                         <td>
-                            <a href="{{ path('app_utilisateurs_show', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}">show</a>
-                            <a href="{{ path('app_utilisateurs_edit', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}">edit</a>
+                            {# <a href="{{ path('app_utilisateurs_show', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}">show</a> #}
+                            <a class="btn-info" href="{{ path('app_utilisateurs_edit', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}">edit</a>
+                            <a class="btn-danger" href="{{ path('app_utilisateurs_delete', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}">delete</a>
                         </td>
                     </tr>
                 {% else %}
@@ -55,7 +68,8 @@
             </table>
 
             {# <a style="display:flex;align-items: center;justify-content: center"href="{{ path('app_utilisateurs_new') }}">Create new client</a> #}
-            <a style="display:flex;align-items: center;justify-content: center"href="{{ path('app_utilisateurs_newA') }}">Create new admin</a>
+            <a class="btn-primary" style="display:flex;align-items: center;justify-content: center"href="{{ path('app_utilisateurs_newA') }}">Create new admin</a>
+
             <!-- End Table with stripped rows -->
 
 
@@ -65,6 +79,7 @@
         </div>
     </div>
 </div>
+
 </div>
 
 {% endblock %}

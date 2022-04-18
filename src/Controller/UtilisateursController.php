@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/utilisateurs")
@@ -34,7 +35,7 @@ class UtilisateursController extends AbstractController
     /**
      * @Route("/new", name="app_utilisateurs_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, UtilisateursRepository $utilisateursRepository): Response
+    public function new(Request $request, UtilisateursRepository $utilisateursRepository ,UserPasswordEncoderInterface $encoder): Response
     {
         $utilisateur = new Utilisateurs();
         $form = $this->createForm(UserType::class, $utilisateur);
@@ -44,6 +45,10 @@ class UtilisateursController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $plainPassword = $utilisateur->getMotdepasse();
+            $encoded = $encoder->encodePassword($utilisateur, $plainPassword);
+            $utilisateur->setMotdepasse($encoded);
             $utilisateursRepository->add($utilisateur);
             return $this->redirectToRoute('app_login_new', [], Response::HTTP_SEE_OTHER);
         }
@@ -56,7 +61,7 @@ class UtilisateursController extends AbstractController
     /**
      * @Route("/newA", name="app_utilisateurs_newA", methods={"GET", "POST"})
      */
-    public function newA(Request $request, UtilisateursRepository $utilisateursRepository): Response
+    public function newA(Request $request, UtilisateursRepository $utilisateursRepository,UserPasswordEncoderInterface $encoder): Response
     {
         $utilisateur = new Utilisateurs();
         $form = $this->createForm(AdminType::class, $utilisateur);
@@ -65,6 +70,9 @@ class UtilisateursController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $plainPassword = $utilisateur->getMotdepasse();
+            $encoded = $encoder->encodePassword($utilisateur, $plainPassword);
+            $utilisateur->setMotdepasse($encoded);
             $utilisateursRepository->add($utilisateur);
             return $this->redirectToRoute('app_utilisateurs_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -119,6 +127,16 @@ class UtilisateursController extends AbstractController
         }
 
         return $this->redirectToRoute('app_utilisateurs_index', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/", name="app_utilisateurs_index_1", methods={"post"})
+     */
+    public function indexRechercher(UtilisateursRepository $utilisateursRepository): Response
+    {
+
+        return $this->render('utilisateurs/index.html.twig', [
+            'utilisateurs' => $utilisateursRepository->findByUsername($_POST['query']),
+        ]);
     }
 
 }

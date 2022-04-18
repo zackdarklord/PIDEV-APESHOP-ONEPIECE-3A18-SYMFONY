@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/login")
@@ -29,7 +30,7 @@ class LoginController extends AbstractController
     /**
      * @Route("/new", name="app_login_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, LoginRepository $loginRepository,UtilisateursRepository $utilisateursRepository): Response
+    public function new(Request $request, LoginRepository $loginRepository,UtilisateursRepository $utilisateursRepository,UserPasswordEncoderInterface $encoder): Response
     {
         $login = new Login();
         $session = $request->getSession();
@@ -41,13 +42,13 @@ class LoginController extends AbstractController
         $session->set('id_user',null);
         if ($form->isSubmitted() && $form->isValid()) {
             $user=$utilisateursRepository->findOneByUsername($login->getUsername());
-            if ($user!=null && $user->getRole()=="admin" &&$login->getPassword()==$user->getMotdepasse()){
+            if ($user!=null && $user->getRole()=="admin" && $encoder->isPasswordValid($user,$login->getPassword())){
                 $session = $request->getSession();
                 $session->set('username',$user->getNomclient());
                 $session->set('id_user',$user->getNumeroutilisateurs());
             return $this->redirectToRoute('admin_home', ['username'=>$login->getUsername()], Response::HTTP_SEE_OTHER);
             }
-            if ($user!=null && $user->getRole()=="client"&&$login->getPassword()==$user->getMotdepasse()){
+            if ($user!=null && $user->getRole()=="client"&& $encoder->isPasswordValid($user,$login->getPassword())  ){
                 $session = $request->getSession();
                 $session->set('username',$user->getNomclient());
                 $session->set('id_user',$user->getNumeroutilisateurs());

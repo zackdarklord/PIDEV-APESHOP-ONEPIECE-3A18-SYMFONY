@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="utilisateurs")
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateursRepository")
  */
-class Utilisateurs
+class Utilisateurs implements UserInterface
 {
     /**
      * @var int
@@ -248,4 +249,28 @@ public function __toString()
 return(string)$this->getNumeroutilisateurs();
 }
 */
+    public function getRoles()
+    {
+       return $this->getRole();
+    }
+
+    public function getPassword()
+    {
+        return $this->getMotdepasse();
+    }
+
+    public function getSalt()
+    {
+        return "";
+    }
+
+    public function getUsername()
+    {
+        return $this->getNomclient();
+    }
+
+    public function eraseCredentials()
+    {
+        return "";
+    }
 }
