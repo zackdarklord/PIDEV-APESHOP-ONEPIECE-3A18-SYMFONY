@@ -93,7 +93,12 @@
        votre Total: {{ total }} DT
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    <button class="btn btn-primary" type="button"style="width: 100%">procéder au paiement<br><i class="bi bi-cash-coin"></i></button>
+    {% if total !=  0 %}
+    <form action="{{ path('checkout',{'total':total}) }}" method="POST">
+        <button class="btn btn-primary" type="submit"style="width: 100%">procéder au paiement<br><i class="bi bi-cash-coin"></i></button>
+    </form>
+    {% endif %}
+
 
 
 

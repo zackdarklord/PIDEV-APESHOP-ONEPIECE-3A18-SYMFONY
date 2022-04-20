@@ -19,7 +19,7 @@ class UtilisateursType extends AbstractType
             ->add('nomclient')
             ->add('nomadmin')
             ->add('adresse')
-            ->add('infocartebancaire')
+            //->add('infocartebancaire')
             ->add('numtel')
         ;
     }

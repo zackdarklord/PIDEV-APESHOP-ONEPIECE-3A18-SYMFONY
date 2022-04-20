@@ -16,7 +16,7 @@ class UserType extends AbstractType
             ->add('motdepasse')
             ->add('nomclient')
             ->add('adresse')
-            ->add('infocartebancaire')
+            //->add('infocartebancaire')
             ->add('numtel')
         ;
     }
