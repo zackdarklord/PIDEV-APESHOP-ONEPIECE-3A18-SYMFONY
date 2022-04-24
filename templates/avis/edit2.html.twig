@@ -5,29 +5,52 @@
 
 {% block body %}
 
+    <div class="services-breadcrumb" >
+        <div class="agile_inner_breadcrumb">
+            <div class="container">
+                <ul class="w3_short">
+                    <li>
+                        <a href="" style="color: black">Home</a>
+                        <i>|</i>
+                    </li>
+                    <li><a href="{{ path('app_avis_indexFront') }}" style="color: black" >Les avis</a> <i>|</i></li>
 
+                    <li style="color: #d43934"><a href="" >Modification</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <!-- top Products -->
     <div class="join-w3l1 py-sm-5 py-4">
-        <div class="container py-xl-4 py-lg-2" style="border: 1px solid rgba(0, 0, 255, 0.2);border-radius: 15% 15%;background-color: rgba(0, 0, 0, 0.8);max-width: 55%;">
+        <div class="container py-xl-4 py-lg-2" style="border: 1px solid rgba(0, 0, 255, 0.2);border-radius:30px 30px;background-color: whitesmoke;text-align: left">
             <!-- tittle heading -->
 
-            <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3" style="color:white;">
+            <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3" style="color:black;margin-top: 20px" >
                 <span>M</span>odifier
                 <span>V</span>otre
                 <span>A</span>vis</h3>
             <!-- //tittle heading -->
-            <div class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-                <!-- product left -->
-                <div class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-                    <div class="wrapper" style="background-color: inherit">
-                        {{ include('avis/_form.html.twig', {'button_label': 'Update'}) }}
-                    </div>
-                </div>
+
                 <!-- //product left -->
 
+            <form action="#" method="post">
+                {{ form_start(form ,{ attr: {novalidate:'novalidate' } }) }}
+                <div class="contact-grids1 w3agile-6">
+
+                    <div class="animated wow slideInUp form-group">
+                        <label class="col-form-label" style="color: black;font-weight: bolder;text-align: left"><h3>Conetenu</h3></label>
+                        {{ form_widget(form.contenuavis, { 'attr': {'class':'form-control' } }) }}
+                        {{ form_errors(form.contenuavis, { 'attr': {'class':'text-danger' } }) }}
+                    </div>
+                    <div class="contact-form" style="margin-bottom: 20px">
+                        <input type="submit" value="Modifier">
+                    </div>
+                </div>
+
+                {{ form_end(form) }}<!-- End General Form Elements -->
+            </form>
 
 
-            </div>
         </div>
     </div>
     </div>

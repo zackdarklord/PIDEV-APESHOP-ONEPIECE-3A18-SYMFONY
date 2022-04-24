@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Avis;
+use App\Entity\Repavis;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -45,22 +46,7 @@ class AvisRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Avis[] Returns an array of Avis objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+
 
 
     public function findOneByid($value): ?Avis
@@ -77,14 +63,46 @@ class AvisRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('u')
             ->join('u.idcategorie', 'r')
+            ->join('u.idrep','x')
             ->where('r.nomcategorie LIKE :val')
+            ->orWhere('x.etat LIKE :val2')
 
-            ->setParameter('val', $value.'%')
+            ->setParameters(array('val'=> $value.'%', 'val2' => $value))
             ->orderBy('u.numeroutilisateur', 'ASC')
             ->getQuery()
             ->getResult()
             ;
     }
+    public function findByUser2($value)
+    {
+        return $this->createQueryBuilder('u')
+
+            ->where('u.contenuavis LIKE :val')
+            ->orWhere('u.contenuavis LIKE :val2')
+
+//            ->setParameter('val', '%'.$value.'%' )
+//            ->setParameter('val2', $value.'%','%'.$value.'%')
+            ->setParameters(array('val'=> '%'.$value.'%', 'val2' => $value.'%'))
+            ->orderBy('u.numeroutilisateur', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    public function findByUser3($value)
+    {
+        return $this->createQueryBuilder('u')
+            ->join('u.idrep', 'r')
+            ->where('r.etat LIKE :val')
+
+            ->setParameter('val', $value.'%' )
+
+            ->orderBy('u.numeroutilisateur', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
     public function update($idrep,$idavis)
     {
 $updateEtat = $this->createQueryBuilder('r')
@@ -97,4 +115,7 @@ $updateEtat = $this->createQueryBuilder('r')
 dump($updateEtat);
 $updateEtat->execute();
 }
+
+
+
 }

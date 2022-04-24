@@ -6,90 +6,247 @@
 {% block body %}
 
 
+<body>
+
+    <!-- banner -->
+    <div class="services-breadcrumb" >
+        <div class="agile_inner_breadcrumb">
+            <div class="container">
+                <ul class="w3_short">
+                    <li>
+                        <a href="" style="color: black">Home</a>
+                        <i>|</i>
+                    </li>
+                    <li><a href="{{ path('app_avis_indexFront') }}" style="color: #d43934" >Les avis</a></li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //banner -->
+
+    <!-- top avis -->
+    <div class="join-w3l1 py-sm-5 py-4" style="text-align: left;">
+
+        <div class="ads-grid py-sm-5 py-4" style="margin-top: -100px">
+            <div class="container py-xl-4 py-lg-2">
+
+                <div class="row">
+
+                    <!-- avis left -->
+                    <div class="agileinfo-ads-display col-lg-9">
+                        <div class="wrapper">
+                            <h3 class="tittle-w3l text-center  mb-sm-4 mb-3" style="background-color: whitesmoke;text-align: center;border-radius:30px 30px;background-color: white">
+
+                                <span>N</span>os
+                                <span>A</span>vis</h3>
 
 
 
-    <main id="main" class="main">
+                            {% for avi in avis %}
+
+                                <div class="side-bar px-sm-4 px-1 py-sm-4  py-3 mt-3"  style="border-radius:30px 30px;background-color: whitesmoke">
+
+                                    <h6 class="text-lg-right" style="color: #0a58ca">  {{ avi.dateajout |date('d-m-Y') }} </h6>
+
+
+
+                                    <h5 style="color: #0a58ca;font-weight: bolder"> {{ avi.idcategorie.nomcategorie }} du client </h5>
+
+                                    <h5 style="color: #0a58ca">   {{ avi.numeroutilisateur.nomclient }} :</h5>
+                                    <br>
 
 
 
 
-        <h1 style="color: #0a53be">Liste des avis</h1>
+                                    <h6  style="color: black">  {{ avi.contenuavis }}  </h6>
+                                    <br>
+                                    {% if avi.numeroutilisateur  %}
 
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
+                                        <div class="row" > <h6 style="margin-left: auto;margin-right: 10px;" class="text-lg-right"> <a href="{{ path('app_avis_edit2', {'idavis': avi.idavis}) }}">
 
-                    <div class="card">
+                                                    <button class="btn btn-primary" style="color:#0a58ca;background-color: initial;border: 1px solid rgba(0, 0, 255, 0.2);border-radius:30px 30px;">Modifier </button>   </a> </h6>
+                                            {% include 'avis/_delete_form.html.twig' %}  </div>
 
-                        <div class="card-body">
+                                    {% endif %}
 
-
-                            <!-- Table with stripped rows -->
-
-                            <div class="dataTable-top">
-
-
-                            </div>
-                            <div class="dataTable-container">
-                                <table class="table datatable dataTable-table">
-
-                                    <thead>
-                                    <tr>
-
-                                        <th scope="col" data-sortable="" style="width: 10%;">
-                                            <a href="#" class="dataTable-sorter">Num User</a>
-                                        </th>
-                                        <th scope="col" data-sortable="" style="width: 20%;" class="desc">
-                                            <a href="#" class="dataTable-sorter">Categorie</a>
-                                        </th>
-                                        <th scope="col" data-sortable="" >
-                                            <a href="#" class="dataTable-sorter">Avis</a>
-                                        </th>
-                                        <th scope="col" data-sortable="" style="width: 5%;">
-
-                                        </th>
-                                        <th scope="col" data-sortable="" style="width: 5%;">
-
-                                        </th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for avi in avis %}
-                                        <tr>
-                                            <td style="font-weight: bolder">{{ avi.numeroutilisateur }}</td>
-                                            {#<td>{{ avi.idavis }}</td>#}
-                                            <td>{{ avi.nomcategorie }}</td>
-                                            <td>{{ avi.contenuavis }}</td>
+                                    {% if avi.idrep != NULL %}  <div class="product-sec1 px-sm-4 px-3 py-sm-3  py-3 mt-2" style="border: 1px solid rgba(0, 0, 255, 0.2);border-radius:30px 30px;" >
+                                        <h6 class="text-lg-right" style="color:#0a58ca;">  {{ avi.idrep.dateajout |date('d-m-Y') }} </h6>
+                                        <h5 style="color: #d43934;font-weight: bolder"> Réponse de l'administration :</h5>
+                                        <h6 style="color: black">  {{ avi.idrep.reponse }} </h6>
+                                        <br>
+                                        <h6 style="color: #0a53be;text-align: right">  {{ avi.idrep.etat }} </h6>
 
 
-                                            <td> <button style="background-color: initial;font-weight: bolder" class="btn btn-primary"> <a   href="{{ path('app_avis_edit', {'idavis': avi.idavis}) }}">Modifier</a> </button></td>
+                                    </div> {% endif %}
 
-                                            <td> <a> {{ include('avis/_delete_form.html.twig') }} </a> </td>
+                                </div>
 
-                                        </tr>
-                                    {% else %}
-                                        <tr>
-                                            <td colspan="3">no records found</td>
-                                        </tr>
-                                    {% endfor %}
 
-                                    </tbody>
-                                </table>
-                            </div>
 
-                            <!-- End Table with stripped rows -->
-                            <div class="dataTable-search" >
-                                <input class="dataTable-input" placeholder="rechercher..." type="text" style="border-color: #0a53be;width: 15%">  </div>
+                            {% endfor %}
+
+
 
                         </div>
-                        <br>
+                    </div>
+                    <!-- //avis left -->
+                    <!-- avis right -->
+                    <div class="col-lg-3 mt-lg-0 mt-4 p-lg-0" style="border-radius:30px 30px;background-color: whitesmoke">
+                        <div class="side-bar p-sm-4 p-3" style="border-radius:30px 30px;">
+
+                            <!-- btn ajout -->
+                            <div style="border-bottom: 1px solid #d43934;margin-top: -20px">
+                                <br>
+                                <ul>
+
+                                    <li style="background-color: whitesmoke;font-weight: bolder;border-color: #0a53be;" class="btn btn-primary">
+                                        <a href="{{ path('app_avis_new') }}"  style="color: #0a53be">
+                                            <i></i> <h3>Ajouter votre avis</h3> </a>
+                                    </li>
+
+                                </ul> <br>
+
+                            </div>
+                            <!-- //btn ajout -->
+
+                            <!-- btn recherche -->
+                            <div class="search-hotel border-bottom py-2"  >
+
+
+                                <div class="customer-rev left-side py-2" >
+                                    <form class="search-form d-flex align-items-center" action="{{ path('app_avis_indexFront_1') }}" method="post">
+                                                   <ul>
+                                                       <li>
+                                                <h4>
+                                                    <select name="query" style="background-color: initial;border-color: #0a53be;color: #0a53be;"   method="post">
+                                                        <option HIDDEN SELECTED value="" style="color: #0a53be">->Recherche<-</option>
+                                                        <optgroup label="Categories" style="color: #d43934">
+
+                                                            <option value="Requette">Requette</option>
+                                                            <option value="Réclamation">Réclamation</option>
+                                                            <option value="Proposition">Proposition</option>
+
+                                                            <option value="Avis">Avis simple</option>
+                                                            <option value="TestCatégorie">Autres</option>
+
+                                                        </optgroup>
+                                                        <optgroup label="Avis" style="color: #0a53be">
+                                                            <option value="">Repondu</option>
+                                                            <option value="Traité">Traité</option>
+                                                            <option value="en cours de traitement">En cours</option>
+                                                        </optgroup>
+
+
+                                                    </select>
+
+                                                    <button type="submit" style="color: #0a53be;background-color: initial;padding-top: 15px;padding-bottom: 18px;border-color: #0a53be;" class="btn btn-primary fas fa-sign-out-alt"   >
+                                                    </button>  </h4>
+                                            </li>
+                                        </ul>
+                                    </form >
+                                </div>
+                            </div>
+                            <!-- //btn recherche -->
+
+
+
+                            <!-- Avis scroll -->
+                            <div class="f-grid py-2" style="border: 1px solid #d43934;border-radius: 15px">
+
+                                <ul>
+
+                                    <h3 style="text-align: center;color: #0a53be;margin-top: 10px;margin-bottom: 10px">     Les avis    </h3>
+
+                                </ul>
+
+                                <div class="box-scroll" style="border-top: #d43934;height: 3000px;border-bottom: 1px solid #d43934;border-top: 1px solid #d43934;background-color: white">
+
+                                    <div class="scroll">
+
+                                        {% for i in range(1, 50) %}
+                                            {% for avi in avis %}
+
+                                                <div class="left-side border-bottom py-4">
+                                                    <div>
+                                                        <ul>
+                                                            >>  {{ avi.contenuavis }}
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+
+                                            {% endfor %}
+                                        {% endfor %}
+
+
+                                        </table>
+
+
+                                    </div>
+                                </div>
+                                <br>
+                                {#                        <button style="background-color: initial;font-weight: bolder;border-color: #d43934" class="btn btn-primary">#}
+                                {#                            <a href="{{ path('app_avis_new') }}"  style="color: #d43934;"> Ajouter avis </a> </button>#}
+                                {#                       #}
+
+
+                            </div>
+                            <!-- //Avis scroll -->
+
+                        </div>
+
+                    </div>
+                    <!-- //avis right -->
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- //top avis -->
+
+    <!-- publicité -->
+    <div class="join-w3l1 py-sm-5 py-4">
+        <div class="container py-xl-4 py-lg-2">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="join-agile text-left p-4">
+                        <div class="row">
+                            <div class="col-sm-7 offer-name">
+                                <h6>Smooth, Rich & Loud Audio</h6>
+                                <h4 class="mt-2 mb-3">Branded Headphones</h4>
+                                <p>Sale up to 25% off all in store</p>
+                            </div>
+                            <div class="col-sm-5 offerimg-w3l">
+                                <img src="
+{{asset('front-office/images/off1.png')}}" alt="" class="img-fluid">
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="col-lg-6 mt-lg-0 mt-5">
+                    <div class="join-agile text-left p-4">
+                        <div class="row ">
+                            <div class="col-sm-7 offer-name">
+                                <h6>A Bigger Phone</h6>
+                                <h4 class="mt-2 mb-3">Smart Phones 5</h4>
+                                <p>Free shipping order over $100</p>
+                            </div>
+                            <div class="col-sm-5 offerimg-w3l">
+                                <img src="
+{{asset('front-office/images/off2.png')}}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- publicité -->
 
-            </div>
-            </div>
-        </section>
-    </main><!-- End #main -->
+</body>
+
 {% endblock %}
+

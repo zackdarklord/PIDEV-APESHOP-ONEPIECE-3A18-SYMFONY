@@ -10,25 +10,20 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RepavisType extends AbstractType
+class RepavisType2 extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('etat',ChoiceType::class, [
-        'choices'  => [
+                'choices'  => [
+                    'Traité' => "Traité",
 
-            'en cours de traitement' => "en cours de traitement",
-            'Traité' => "Traité",
 
-        ],])
-            ->add('reponse',TextareaType::class)
-            ->add('dateajout',DateType::class, [
-                'attr' => [
-                    'hidden' => 'hidden',
-                    'disabled' => 'disabled',
                 ],])
-            ->add('idavis')
+            ->add('reponse',TextareaType::class)
+
+
 
         ;
     }

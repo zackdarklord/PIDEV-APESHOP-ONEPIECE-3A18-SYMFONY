@@ -13,7 +13,7 @@
 
 
 
-        <h1 style="color: #0a53be">Liste des avis</h1>
+        <h1 style="color: #0a53be;">Liste des avis</h1>
 
 <section class="section">
     <div class="row">
@@ -37,19 +37,19 @@
                                 <tr>
 
                                     <th scope="col" data-sortable="" style="width: 15%;">
-                                        <a href="#" class="dataTable-sorter" > <h4 style="color: #0a53be;font-weight: bolder">Utilisateur</h4></a>
+                                        <a > <h4 style="color: #0a53be;font-weight: bolder">Utilisateur</h4></a>
                                     </th>
                                     <th scope="col" data-sortable="" style="width: 15%;" class="desc">
-                                        <a href="#" class="dataTable-sorter"><h4 style="color: #0a53be;font-weight: bolder">Categorie</h4></a>
+                                        <a><h4 style="color: #0a53be;font-weight: bolder">Categorie</h4></a>
                                     </th>
                                     <th scope="col" data-sortable="" >
-                                        <a href="#" class="dataTable-sorter"><h4 style="color: #0a53be;font-weight: bolder">Avis</h4></a>
+                                        <a><h4 style="color: #0a53be;font-weight: bolder">Avis</h4></a>
                                     </th>
                                     <th scope="col" data-sortable="" style="width: 15%;">
-                                        <a href="#" class="dataTable-sorter" > <h4 style="color: #0a53be;font-weight: bolder">Réponse</h4></a>
+                                        <a> <h4 style="color: #0a53be;font-weight: bolder">Etat</h4></a>
                                     </th>
                                     <th scope="col" data-sortable="" style="width: 15%;">
-                                        <a href="#" class="dataTable-sorter" > <h4 style="color: #0a53be;font-weight: bolder">Date d'ajout</h4></a>
+                                        <a  class="dataTable-sorter" > <h4 style="color: #0a53be;font-weight: bolder">Date d'ajout</h4></a>
                                     </th>
 
 
@@ -57,6 +57,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                {%   set x= 0   %}
+                                {%   set y= 0   %}
+                                {%   set z= 0   %}
                                 {% for avi in avis %}
                                     <tr>
                                         {#<td style="font-weight: bolder">{{ avi.numeroutilisateur }}</td>
@@ -65,18 +68,26 @@
                                         <td>{{ avi.idcategorie.nomcategorie }}</td>
                                         <td>{{ avi.contenuavis }}</td>
                                          {% if avi.idrep != NULL %}               <td>{{ avi.idrep.etat }}</td>
+                                        {% if avi.idrep.etat == 'Traité' %}
+                                            {%   set x= x+1   %}
 
-                                         {% else %} <td>Non Traité</td>
+                                        {% elseif avi.idrep.etat == 'en cours de traitement' %}
+                                            {%   set y= y+1   %}
+                                        {% endif %}
+                                         {% else %} <td>Non Traité</td>   {%   set z= z+1   %}
                                            {% endif %}
                                         <td>{{ avi.dateajout ? avi.dateajout|date('Y-m-d') : '' }}</td>
                                         {#  <td> <button style="background-color: initial;font-weight: bolder" class="btn btn-primary"> <a   href="{{ path('app_avis_edit', {'idavis': avi.idavis}) }}">Modifier</a> </button></td>
                                         #}
-
-
-                                    </tr>
+                                        </tr>
                                 {% else %}
+
                                     <tr>
-                                        <td colspan="3">no records found</td>
+                                        <td> Pas d'avis disponible. </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 {% endfor %}
 
@@ -85,14 +96,15 @@
                         </div>
 
                     <!-- End Table with stripped rows -->
+                    <br>
                     <div class="search-bar" >
                         <form class="search-form d-flex align-items-center" action="{{ path('app_avis_index_1') }}" method="post">
-                            <input type="text" name="query" placeholder="Recherche par categorie" title="Enter search keyword">
-                            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                            <input style="background-color: initial;font-weight: bolder;color: #0a58ca" class="btn btn-primary" type="text" name="query" placeholder="Recherche par avis" title="Enter search keyword">
+                            <button style="background-color: initial;font-weight: bolder;color: #0a58ca" class="btn btn-primary" type="submit" title="Search"><i class="bi bi-search"></i></button>
                         </form >
                     </div>
-<br>
-            </div>
+
+                </div>
             </div>
 
         </div>
@@ -100,110 +112,94 @@
 </section>
 
 
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Chart avis</h5>
+        <div class="row" style="margin-right: 35px;">
 
-                    <!-- Bar Chart -->
-                    <canvas id="barChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 230px; width: 462.222px;" width="416" height="207"></canvas>
+
+            <h1 style="color: #0a53be;text-align: center">Traitement des avis</h1>
+            <div class="card col-sm-5" style="margin-right: 40px;margin-left: 60px">
+                <div class="card-body">
+
+                    <br>
+                    <!-- Radar Chart -->
+                    <canvas id="radarChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 398.889px; width: 462.222px;" width="416" height="359"></canvas>
                     <script>
                         document.addEventListener("DOMContentLoaded", () => {
-                            new Chart(document.querySelector('#barChart'), {
-                                type: 'bar',
+                            new Chart(document.querySelector('#radarChart'), {
+                                type: 'radar',
                                 data: {
-                                    labels: ['Reclamation', 'Test', 'Propostion', 'Requete'],
+                                    labels: [
+                                        '.',
+                                        'En cours',
+                                        '.',
+                                        'Traité',
+                                        '.',
+                                        'Non Traité'
+
+
+                                    ],
                                     datasets: [{
-                                        label: 'Bar Chart',
-                                        data: [65, 59, 80, 81, 56, 55, 40],
-                                        backgroundColor: [
-                                            'rgba(255, 99, 132, 0.2)',
-                                            'rgba(255, 159, 64, 0.2)',
-                                            'rgba(255, 205, 86, 0.2)',
-
-                                            'rgba(153, 102, 255, 0.2)'
-                                        ],
-                                        borderColor: [
-                                            'rgb(255, 99, 132)',
-                                            'rgb(255, 159, 64)',
-                                            'rgb(255, 205, 86)',
-                                            'rgb(75, 192, 192)',
-
-                                            'rgb(201, 203, 207)'
-                                        ],
-                                        borderWidth: 1
+                                        label: 'Etat',
+                                        data: [0,{{x}},0, {{y}},0, {{z}}],
+                                        fill: true,
+                                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                        borderColor: 'rgb(255, 99, 132)',
+                                        pointBackgroundColor: 'rgb(255, 99, 132)',
+                                        pointBorderColor: '#fff',
+                                        pointHoverBackgroundColor: '#fff',
+                                        pointHoverBorderColor: 'rgb(255, 99, 132)'
                                     }]
                                 },
                                 options: {
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true
+                                    elements: {
+                                        line: {
+                                            borderWidth: 3
                                         }
                                     }
                                 }
                             });
                         });
                     </script>
-                    <!-- End Bar CHart -->
+                    <!-- End Radar CHart -->
 
                 </div>
             </div>
-        </div>
-        <div class="card col-sm-6">
-            <div class="card-body">
-                <h5 class="card-title">Radar Chart</h5>
+            <div class="card col-sm-5">
 
-                <!-- Radar Chart -->
-                <canvas id="radarChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 398.889px; width: 462.222px;" width="416" height="359"></canvas>
+            <div class="card-body">
+
+                <br>
+                <!-- Polar Area Chart -->
+                <canvas id="polarAreaChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 398.889px; width: 462.222px;" width="416" height="359"></canvas>
                 <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                        new Chart(document.querySelector('#radarChart'), {
-                            type: 'radar',
+                        new Chart(document.querySelector('#polarAreaChart'), {
+                            type: 'polarArea',
                             data: {
                                 labels: [
-                                    'Eating',
-                                    'Drinking',
-                                    'Sleeping',
-                                    'Designing',
-                                    'Coding',
-                                    'Cycling',
-                                    'Running'
+                                    'En cours',
+                                    'Traité',
+                                    'Non Traité'
+
                                 ],
                                 datasets: [{
-                                    label: 'First Dataset',
-                                    data: [65, 59, 90, 81, 56, 55, 40],
-                                    fill: true,
-                                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                    borderColor: 'rgb(255, 99, 132)',
-                                    pointBackgroundColor: 'rgb(255, 99, 132)',
-                                    pointBorderColor: '#fff',
-                                    pointHoverBackgroundColor: '#fff',
-                                    pointHoverBorderColor: 'rgb(255, 99, 132)'
-                                }, {
-                                    label: 'Second Dataset',
-                                    data: [28, 48, 40, 19, 96, 27, 100],
-                                    fill: true,
-                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                    borderColor: 'rgb(54, 162, 235)',
-                                    pointBackgroundColor: 'rgb(54, 162, 235)',
-                                    pointBorderColor: '#fff',
-                                    pointHoverBackgroundColor: '#fff',
-                                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                                    label: 'My First Dataset',
+                                    data: [{{y}},{{x}},{{z}}],
+                                    backgroundColor: [
+                                        'rgb(255, 205, 86)',
+                                        'rgb(75, 192, 192)',
+                                        'rgb(255, 99, 132)'
+
+
+                                    ]
                                 }]
-                            },
-                            options: {
-                                elements: {
-                                    line: {
-                                        borderWidth: 3
-                                    }
-                                }
                             }
                         });
                     });
                 </script>
-                <!-- End Radar CHart -->
+                <!-- End Polar Area Chart -->
 
             </div>
         </div>
+    </div>
     </main><!-- End #main -->
 {% endblock %}

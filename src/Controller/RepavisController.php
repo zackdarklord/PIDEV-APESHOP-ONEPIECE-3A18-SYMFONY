@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Avis;
 use App\Entity\Repavis;
 use App\Form\RepavisType;
+use App\Form\RepavisType2;
 use App\Repository\AvisRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\Integer;
@@ -34,7 +35,7 @@ class RepavisController extends AbstractController
     /**
      * @Route("/new", name="app_repavis_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager,AvisRepository $repository): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,AvisRepository $repository,\Swift_Mailer $mailer): Response
     {
         $repavi = new Repavis();
         $form = $this->createForm(RepavisType::class, $repavi);
@@ -42,17 +43,22 @@ class RepavisController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($repavi->getEtat()=='Traité' and $repavi->getIdavis()->getNumeroutilisateur()->getAdresse() != NULL )
+                {
+            $message = (new \Swift_Message('Apeshop'))
+                ->setFrom( $repavi->getIdavis()->getNumeroutilisateur()->getEmail())
+                ->setTo('benguebilaahmed@gmail.com')
 
-//            ,\Swift_Mailer $mailer
-//            $message = (new \Swift_Message('Hello you got Email'))
-//                ->setFrom('benguebilaahmed@gmail.com')
-//                ->setTo('benguebilaahmed@gmail.com')
-//                ->setBody(
-//                       $repavi['reponse'],'text/plain'
-//
-//                );
-//            $mailer->send($message);
+                ->addcc($repavi->getIdavis()->getNumeroutilisateur()->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'repavis/mailing.html.twig',compact('repavi')
+                    ),
+                    'text/html'       );
 
+            $mailer->send($message);
+            $this->addFlash('message','le message a ete envoyer');
+                }
 
             $entityManager->persist($repavi);
 
@@ -81,12 +87,67 @@ class RepavisController extends AbstractController
     /**
      * @Route("/{idrep}/edit", name="app_repavis_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Repavis $repavi, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Repavis $repavi, EntityManagerInterface $entityManager,\Swift_Mailer $mailer): Response
     {
         $form = $this->createForm(RepavisType::class, $repavi);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($repavi->getEtat()=='Traité' and $repavi->getIdavis()->getNumeroutilisateur()->getAdresse() != NULL )
+            {
+                $message = (new \Swift_Message('Apeshop'))
+                    ->setFrom( $repavi->getIdavis()->getNumeroutilisateur()->getEmail())
+                    ->setTo('benguebilaahmed@gmail.com')
+                    ->addcc($repavi->getIdavis()->getNumeroutilisateur()->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'repavis/mailing.html.twig',compact('repavi')
+                        ),
+                        'text/html'       );
+
+                $mailer->send($message);
+                $this->addFlash('message','le message a ete envoyer');
+            }
+
+
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_repavis_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('repavis/edit.html.twig', [
+            'repavi' => $repavi,
+            'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/{idrep}/edit2", name="app_repavis_edit2", methods={"GET", "POST"})
+     */
+    public function edit2(Request $request, Repavis $repavi, EntityManagerInterface $entityManager,\Swift_Mailer $mailer): Response
+    {
+        $form = $this->createForm(RepavisType2::class, $repavi);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($repavi->getEtat()=='Traité' and $repavi->getIdavis()->getNumeroutilisateur()->getAdresse() != NULL )
+            {
+                $message = (new \Swift_Message('Apeshop'))
+                    ->setFrom( $repavi->getIdavis()->getNumeroutilisateur()->getEmail())
+                    ->setTo('benguebilaahmed@gmail.com')
+                    ->addcc($repavi->getIdavis()->getNumeroutilisateur()->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'repavis/mailing.html.twig',compact('repavi')
+                        ),
+                        'text/html'       );
+
+                $mailer->send($message);
+                $this->addFlash('message','le message a ete envoyer');
+            }
+
+
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_repavis_index', [], Response::HTTP_SEE_OTHER);

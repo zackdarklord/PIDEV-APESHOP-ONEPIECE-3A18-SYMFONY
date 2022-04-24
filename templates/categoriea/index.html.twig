@@ -44,7 +44,7 @@
 
 
 
-                                         <td> <button style="background-color: initial;font-weight: bolder" class="btn btn-primary"> <a href="{{ path('app_categoriea_edit', {'idcategorie': categoriea.idcategorie}) }}">Modifier</a></td>
+                                         <td> <button style="background-color: initial;font-weight: bolder" class="btn btn-primary"> <a href="{{ path('app_categoriea_edit', {'idcategorie': categoriea.idcategorie}) }}">Modifier</a></button></td>
 
                                         <td>  {{ include('categoriea/_delete_form.html.twig') }}</td>
                                      </tr>
@@ -56,6 +56,7 @@
                                     </tbody>
                                 </table>
                             <br>
+                            <button style="background-color: initial;font-weight: bolder;color: #0a58ca" class="btn btn-primary"> <a href="{{ path('app_categoriea_new') }}">Ajouter une categorie</a> </button>
                         </div></div>
                         </div></div>
         </section>

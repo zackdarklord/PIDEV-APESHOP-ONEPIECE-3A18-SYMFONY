@@ -4,7 +4,77 @@
 
 {% block body %}
 
-    {{ include('repavis/_form.html.twig') }}
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Ajouter une Reponse</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Reponse</li>
+                    <li class="breadcrumb-item"><a href="{{ path('app_repavis_index') }}">list</a></li>
+                    <li class="breadcrumb-item active">ajout</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-6">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Remplir ce formulaire</h5>
+
+                            <!-- General Form Elements -->
+                            {{ form_start(form ,{ attr: {novalidate:'novalidate' } }) }}
+
+                            <div class="row mb-3">
+                                <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Etat</label>
+                                    <div class="col-sm-10">
+                                        {{ form_widget(form.etat, { 'attr': {'class':'form-select' } }) }}
+                                        {{ form_errors(form.etat    , { 'attr': {'class':'text-danger' } }) }}
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Avis</label>
+                                    <div class="col-sm-10">
+                                        {{ form_widget(form.idavis, { 'attr': {'class':'form-select' } }) }}
+                                        {{ form_errors(form.idavis, { 'attr': {'class':'text-danger' } }) }}
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Reponse</label>
+                                    <div class="col-sm-10">
+                                        {{ form_widget(form.reponse, { 'attr': {'class':'form-control' } }) }}
+                                        {{ form_errors(form.reponse, { 'attr': {'class':'text-danger' } }) }}
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label"> </label>
+                                    <div class="col-sm-10">
+                                        <button class="btn btn-primary">{{ button_label|default('Sauvegarder') }}</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            {{ form_widget(form.dateajout, { 'attr': {'class':'form-select' } }) }}
+
+
+                            {{ form_end(form) }}<!-- End General Form Elements -->
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </section>
+
+    </main><!-- End #main -->
 
     <a href="{{ path('app_repavis_index') }}">back to list</a>
 {% endblock %}
