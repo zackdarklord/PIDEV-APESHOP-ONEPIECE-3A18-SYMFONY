@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Utilisateurs;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserType extends AbstractType
 {
@@ -18,6 +20,8 @@ class UserType extends AbstractType
             ->add('adresse')
             //->add('infocartebancaire')
             ->add('numtel')
+            ->add('imageFile',VichImageType::class )
+
         ;
     }
 

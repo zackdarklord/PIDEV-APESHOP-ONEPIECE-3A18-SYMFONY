@@ -3,60 +3,85 @@
 {% block title %}Utilisateurs index{% endblock %}
 
 {% block body %}
+    {% set mar, apr, may, adm, cli   = 0, 0, 0, 0, 0 %}
+  <main class="main" id="main">
+<section class="section" >
+<div class ="row " >
 
-<div class ="row" style="display: flex;align-items: center;justify-content: center">
-<div class="col-lg-6">
-    <div class="card"style="width: 2000px">
-        <div class="card-body" >
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body "  >
             <h5 class="card-title"STYLE="padding-top: 100px">liste des utilisateurs</h5>
-            <div class="search-bar" >
-                <form class="search-form d-flex align-items-center" action="{{ path('app_utilisateurs_index_1') }}" method="post">
-                    <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                    <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            <div class="search-bar d-inline-flex  " >
+                <form class="search-form d-flex align-items-center " action="{{ path('app_utilisateurs_index_1') }}" method="post">
+                    <input  class="w-100" type="text" name="query" placeholder="Search" title="Enter search keyword">
+                    <button type="submit" title="Search"><i class="bi bi-search btn-outline-primary"></i></button>
+                </form >
+
+                <form class="d-flex align-items-center" action="{{ path('app_utilisateurs_index_tri') }}" >
+                    <button class="btn-primary w-100 " style="margin-left: 20px" type="submit" title="trier">trier par date d'inscription</button>
                 </form >
             </div>
         </div>
 
             <!-- Table with stripped rows -->
-
-            <table class="table table-striped">
+<div class="col-lg-12">
+            <table class="table table-striped" >
                 <thead>
                 <tr>
-                    <th scope="col">Numeroutilisateurs</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Motdepasse</th>
-                    <th scope="col">Dateinscription</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Username</th>
+                    {# <th scope="col">Numeroutilisateurs</th> #}
+                    <th scope="col" colspan="10px">Email</th>
+                    <th scope="col" colspan="10px">image</th>
+                   {#  <th scope="col">Motdepasse</th>#}
+                    <th scope="col"colspan="10px">Dateinscription</th>
+                    <th scope="col"colspan="10px">Role</th>
+                    <th scope="col"colspan="10px">Username</th>
                     {# <th scope="col">Nomadmin</th>#}
-                    <th scope="col">Adresse</th>
-                    <th scope="col">Infocartebancaire</th>
-                    <th scope="col">Numtel</th>
-                    <th scope="col">actions</th>
+                    <th scope="col"colspan="10px">Adresse</th>
+                    {#  <th scope="col">Infocartebancaire</th>#}
+                    <th scope="col"colspan="10px">Numtel</th>
+                    <th scope="col"colspan="10px">actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for utilisateur in utilisateurs %}
+                    {% if utilisateur.dateinscription|date('m') == 3 %}
+                        {% set mar=mar+1 %}
+                    {% endif %}
+                    {% if utilisateur.dateinscription|date('m') == 4 %}
+                        {% set apr=apr+1 %}
+                    {% endif %}
+                    {% if utilisateur.dateinscription|date('m') == 5 %}
+                        {% set may=may+1 %}
+                    {% endif %}
+                    {% if utilisateur.role ==  "admin" %}
+                        {% set adm=adm+1 %}
+                    {% endif %}
+                    {% if utilisateur.role ==  "client" %}
+                        {% set cli=cli+1 %}
+                    {% endif %}
+
                     <tr>
 
-                        <td>{{ utilisateur.numeroutilisateurs }}</td>
-                        <td>{{ utilisateur.email }}</td>
-                        <td>{{ utilisateur.motdepasse }}</td>
-                        <td>{{ utilisateur.dateinscription ? utilisateur.dateinscription|date('Y-m-d') : '' }}</td>
-                        <td>{{ utilisateur.role }}</td>
+                        {# <td>{{ utilisateur.numeroutilisateurs }}</td> #}
+                        <td colspan="10px">{{ utilisateur.email }}</td>
+                        <td colspan="10px"><img src="{{  vich_uploader_asset(utilisateur, 'imageFile')}}" alt="Profile" class="rounded-circle w-25 h-25"></td>
+                       {#  <td>{{ utilisateur.motdepasse }}</td>#}
+                        <td colspan="10px">{{ utilisateur.dateinscription ? utilisateur.dateinscription|date('Y-m-d') : '' }}</td>
+                        <td colspan="10px">{{ utilisateur.role }}</td>
                          {% if utilisateur.nomclient is null %}
-                        <td>{{ utilisateur.nomadmin }}</td>
+                        <td colspan="10px">{{ utilisateur.nomadmin }}</td>
 
                         {% else  %}
-                            <td>{{ utilisateur.nomclient }}</td>
+                            <td colspan="10px">{{ utilisateur.nomclient }}</td>
                             {% endif %}
-                        <td>{{ utilisateur.adresse }}</td>
-                        <td>{{ utilisateur.infocartebancaire }}</td>
-                        <td>{{ utilisateur.numtel }}</td>
-                        <td>
+                        <td colspan="10px">{{ utilisateur.adresse }}</td>
+                       {#  <td>{{ utilisateur.infocartebancaire }}</td>#}
+                        <td colspan="10px">{{ utilisateur.numtel }}</td>
+                        <td colspan="10px">
                             {# <a href="{{ path('app_utilisateurs_show', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}">show</a> #}
-                            <a class="btn-info" href="{{ path('app_utilisateurs_edit', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}">edit</a>
-                            <a class="btn-danger" href="{{ path('app_utilisateurs_delete', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}">delete</a>
+                            <a class="btn-success w-25" href="{{ path('app_utilisateurs_edit', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}"><i class="bi bi-pencil"></i></a>
+                            <a class="btn-danger w-25" href="{{ path('app_utilisateurs_delete', {'numeroutilisateurs': utilisateur.numeroutilisateurs}) }}"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 {% else %}
@@ -66,20 +91,112 @@
                 {% endfor %}
                 </tbody>
             </table>
+</div>
 
             {# <a style="display:flex;align-items: center;justify-content: center"href="{{ path('app_utilisateurs_new') }}">Create new client</a> #}
-            <a class="btn-primary" style="display:flex;align-items: center;justify-content: center"href="{{ path('app_utilisateurs_newA') }}">Create new admin</a>
+            <a class="btn-primary " style="display:flex;align-items: center;justify-content: center"href="{{ path('app_utilisateurs_newA') }}">Create new admin</a>
 
             <!-- End Table with stripped rows -->
 
 
 
+<hr class="w-100" style="color: blue">
+        <div class="col-lg-12 d-inline-flex">
+            <div class="card w-50">
+                <div class="card-body">
+                    <h5 class="card-title">Bar CHart ( date d'inscription )</h5>
+
+                    <!-- Bar Chart -->
+                    <canvas id="barChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 192.8px; width: 386.4px;" width="483" height="241"></canvas>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                            new Chart(document.querySelector('#barChart'), {
+                                type: 'bar',
+                                data: {
+                                    labels: ['March', 'April', 'May'],
+                                    datasets: [{
+                                        label: 'Bar Chart',
+                                        data: [ {{ mar }}, {{ apr }}, {{ may }}  ],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)',
+                                            'rgba(255, 205, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            'rgba(153, 102, 255, 0.2)',
+                                            'rgba(201, 203, 207, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgb(255, 99, 132)',
+                                            'rgb(255, 159, 64)',
+                                            'rgb(255, 205, 86)',
+                                            'rgb(75, 192, 192)',
+                                            'rgb(54, 162, 235)',
+                                            'rgb(153, 102, 255)',
+                                            'rgb(201, 203, 207)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    </script>
+                    <!-- End Bar CHart -->
+
+                </div>
+            </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Doughnut Chart (selon le role)</h5>
+
+                        <!-- Doughnut Chart -->
+                        <canvas id="doughnutChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 400px; width: 884.8px;" width="1106" height="500"></canvas>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                                new Chart(document.querySelector('#doughnutChart'), {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: [
+                                            'admins',
+                                            'clients',
+
+                                        ],
+                                        datasets: [{
+                                            label: 'My First Dataset',
+                                            data: [{{ adm }}, {{ cli }}],
+                                            backgroundColor: [
+                                                'rgb(255, 205, 86)',
+                                                'rgb(54, 162, 235)',
+
+                                            ],
+                                            hoverOffset: 4
+                                        }]
+                                    }
+                                });
+                            });
+                        </script>
+                        <!-- End Doughnut CHart -->
 
 
+                </div>
+            </div>
+        </div>
         </div>
     </div>
-</div>
 
 </div>
 
+
+</section>
+
+  </main>
 {% endblock %}
+

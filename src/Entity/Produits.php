@@ -124,7 +124,7 @@ class Produits
     public function __toString()
     {
         // TODO: Implement __toString() method.
-    return (string)$this->getNomproduit();
+        return (string)$this->getNomproduit();
     }
 
 

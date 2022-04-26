@@ -20,17 +20,54 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UtilisateursController extends AbstractController
 {
+    /**
+     * @Route("/", name="app_utilisateurs_index_tri", methods={"GET"})
+     */
+    public function indexTri(UtilisateursRepository $utilisateursRepository): Response
+    {
+        return $this->render('utilisateurs/index.html.twig', [
+            'utilisateurs' => $utilisateursRepository->findAlltri(),
+        ]);
+    }
 
+    /**
+     * @Route("/prof", name="app_utilisateurs_profiler", methods={"GET"})
+     */
+    public function profile1(UtilisateursRepository $utilisateursRepository,Request $request): Response
+    {
+        $session = $request->getSession();
+        $id= $session->get('user_id');
+        return $this->render('utilisateurs/profile.html.twig',
+            [
+                'utilisateur' => $utilisateursRepository->findOneByUsername($session->get('username'))
+            ]);
+    }
 
     /**
      * @Route("/", name="app_utilisateurs_index", methods={"GET"})
      */
     public function index(UtilisateursRepository $utilisateursRepository): Response
     {
+        $users=$utilisateursRepository->findAll();
+
+
         return $this->render('utilisateurs/index.html.twig', [
-            'utilisateurs' => $utilisateursRepository->findAll(),
+            'utilisateurs' => $users,
         ]);
     }
+
+    /**
+     * @Route("/profile", name="app_utilisateurs_profile", methods={"GET"})
+     */
+    public function profile(UtilisateursRepository $utilisateursRepository,Request $request): Response
+    {
+        $session = $request->getSession();
+        $id= $session->get('user_id');
+        return $this->render('utilisateurs/user_profile.html.twig', [
+            'utilisateur' => $utilisateursRepository->findOneByUsername($session->get('username')),
+        ]);
+    }
+
 
     /**
      * @Route("/new", name="app_utilisateurs_new", methods={"GET", "POST"})
@@ -96,7 +133,7 @@ class UtilisateursController extends AbstractController
     /**
      * @Route("/{numeroutilisateurs}/edit", name="app_utilisateurs_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Utilisateurs $utilisateur, UtilisateursRepository $utilisateursRepository): Response
+    public function edit(Request $request, Utilisateurs $utilisateur, UtilisateursRepository $utilisateursRepository,UserPasswordEncoderInterface $encoder): Response
     {
 
             $form = $this->createForm(UtilisateursType::class, $utilisateur);
@@ -107,11 +144,40 @@ class UtilisateursController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $plainPassword = $utilisateur->getMotdepasse();
+            $encoded = $encoder->encodePassword($utilisateur, $plainPassword);
+            $utilisateur->setMotdepasse($encoded);
             $utilisateursRepository->add($utilisateur);
             return $this->redirectToRoute('app_utilisateurs_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('utilisateurs/edit.html.twig', [
+            'utilisateur' => $utilisateur,
+            'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/{numeroutilisateurs}/editu", name="app_utilisateurs_editu", methods={"GET", "POST"})
+     */
+    public function editu(Request $request, Utilisateurs $utilisateur, UtilisateursRepository $utilisateursRepository,UserPasswordEncoderInterface $encoder): Response
+    {
+
+        $form = $this->createForm(UtilisateursType::class, $utilisateur);
+
+        //$utilisateur->setRole("client");
+        //$utilisateur->setDateinscription(\DateTime::createFromFormat('d/m/Y',date('d/m/Y')));
+        //$utilisateur->setNomadmin(null);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $plainPassword = $utilisateur->getMotdepasse();
+            $encoded = $encoder->encodePassword($utilisateur, $plainPassword);
+            $utilisateur->setMotdepasse($encoded);
+            $utilisateursRepository->add($utilisateur);
+            return $this->redirectToRoute('app_utilisateurs_profiler', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('utilisateurs/editu.html.twig', [
             'utilisateur' => $utilisateur,
             'form' => $form->createView(),
         ]);

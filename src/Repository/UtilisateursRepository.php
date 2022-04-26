@@ -59,7 +59,17 @@ class UtilisateursRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-
+    /**
+     * @return Utilisateurs[] Returns an array of Utilisateurs objects
+     */
+    public function findAlltri()
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.dateinscription', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     public function findOneByUsername($value): ?Utilisateurs
     {

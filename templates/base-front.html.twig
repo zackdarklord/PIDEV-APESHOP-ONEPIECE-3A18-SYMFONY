@@ -85,6 +85,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <a href="{{ path('app_utilisateurs_new') }}" class="text-white">
                                 <i class="fas fa-sign-out-alt mr-2"></i>Register </a>
                         </li>
+                        {% else %}
+                            <li class="text-center text-white">
+                                <a href="{{ path('app_utilisateurs_profiler') }}" class="text-white">
+                                    <i class="fas fa-user-circle mr-2"></i>show profile </a>
+                            </li>
                     {% endif %}
                 </ul>
                 <!-- //header lists -->
@@ -812,8 +817,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </li>
                     {% if app.session.get ('username') is not null %}
                         <li class="nav-item" style="padding-left: 70px">
-                            <p> welcome to Ape Shop <b>{{ app.session.get('username') }}</b>!</p>
+                            <p> welcome to Ape Shop :</p><b>{{ app.session.get('username') }}</b>!
                         </li>
+
                         <li class="nav-item">
                             <a class="btn my-2 my-sm-0" onclick="logout()" href="{{ path('app_login_new') }}">log out</a>
                         </li>

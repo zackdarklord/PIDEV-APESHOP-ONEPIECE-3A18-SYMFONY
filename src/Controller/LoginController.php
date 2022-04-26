@@ -40,13 +40,15 @@ class LoginController extends AbstractController
         $form->handleRequest($request);
         $session->set('username',null);
         $session->set('id_user',null);
+        $session->set('image',null);
         if ($form->isSubmitted() && $form->isValid()) {
             $user=$utilisateursRepository->findOneByUsername($login->getUsername());
             if ($user!=null && $user->getRole()=="admin" && $encoder->isPasswordValid($user,$login->getPassword())){
                 $session = $request->getSession();
                 $session->set('username',$user->getNomclient());
                 $session->set('id_user',$user->getNumeroutilisateurs());
-            return $this->redirectToRoute('admin_home', ['username'=>$login->getUsername()], Response::HTTP_SEE_OTHER);
+
+            return $this->redirectToRoute('admin_home', ['username'=>$login->getUsername(),'utilisateur'=>$user], Response::HTTP_SEE_OTHER);
             }
             if ($user!=null && $user->getRole()=="client"&& $encoder->isPasswordValid($user,$login->getPassword())  ){
                 $session = $request->getSession();

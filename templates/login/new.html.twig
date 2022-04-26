@@ -8,8 +8,10 @@
 
 
     {{ include('login/_form.html.twig') }}
+<div class="d-flex align-center justify-content-center">
+    <a class="btn-outline-primary "style="display: flex;align-items: center;justify-content: center"href="{{ path('apeshop_home') }}">back to home</a>
 
-    <a class="btn-outline-primary"style="display: flex;align-items: center;justify-content: center"href="{{ path('apeshop_home') }}">back to home</a>
 
+</div>
     <p style="display: flex;align-items: center;justify-content: center;color: red">{{ error }}</p>
 {% endblock %}
