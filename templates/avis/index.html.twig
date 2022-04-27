@@ -8,14 +8,14 @@
 
 
 
-    <main id="main" class="main">
+    <main id="main" class="main" >
 
 
 
 
         <h1 style="color: #0a53be;">Liste des avis</h1>
 
-<section class="section">
+         <section class="section">
     <div class="row">
         <div class="col-lg-12">
 
@@ -30,9 +30,29 @@
 
 
                         </div>
-                        <div class="dataTable-container">
-                            <table class="table datatable dataTable-table">
+                    <table><tr>
 
+                            <th>
+                                <button style="background-color: initial;font-weight: bolder;color: #0a58ca" class="btn btn-primary"> <a href="{{ path('app_repavis_new') }}">Répondre a un utilisateur</a> </button>
+
+                            </th>
+                            <th style="width: 15%;">
+                                <form  action="{{ path('app_avis_index_1') }}" method="post">
+                                    <button name="query" style="background-color: initial;font-weight: bolder;color: #0a58ca" class="btn btn-primary" type="submit" title="Search">Trie par categories</button>
+                                </form >
+                            </th>
+                            <th style="width: 15%;">
+                                <form class="search-form d-flex align-items-center" action="{{ path('app_avis_index_1') }}" method="post">
+                                    <input style="background-color: initial;font-weight: bolder;color: #0a58ca" class="btn btn-primary" type="text" name="query" placeholder="Recherche par avis" title="Enter search keyword">
+                                    <button style="background-color: initial;font-weight: bolder;color: #0a58ca" class="btn btn-primary" type="submit" title="Search"><i class="bi bi-search"></i></button>
+                                </form >
+                            </th>
+
+                        </tr></table>
+                        <div class="dataTable-container">
+                            <table class="table datatable dataTable-table"  >
+
+                                <br>
                                 <thead>
                                 <tr>
 
@@ -43,13 +63,13 @@
                                         <a><h4 style="color: #0a53be;font-weight: bolder">Categorie</h4></a>
                                     </th>
                                     <th scope="col" data-sortable="" >
-                                        <a><h4 style="color: #0a53be;font-weight: bolder">Avis</h4></a>
+                                        <a class="dataTable-sorter" href="{{ path('app_avis_index_1') }}"><h4  style="color: #0a53be;font-weight: bolder">Avis</h4></a>
                                     </th>
-                                    <th scope="col" data-sortable="" style="width: 15%;">
+                                    <th scope="col" data-sortable="" style="width: 10%;">
                                         <a> <h4 style="color: #0a53be;font-weight: bolder">Etat</h4></a>
                                     </th>
                                     <th scope="col" data-sortable="" style="width: 15%;">
-                                        <a  class="dataTable-sorter" > <h4 style="color: #0a53be;font-weight: bolder">Date d'ajout</h4></a>
+                                        <a> <h4 style="color: #0a53be;font-weight: bolder">Date d'ajout</h4></a>
                                     </th>
 
 
@@ -60,6 +80,11 @@
                                 {%   set x= 0   %}
                                 {%   set y= 0   %}
                                 {%   set z= 0   %}
+                                {%   set a= 0   %}
+                                {%   set r= 0   %}
+                                {%   set c= 0   %}
+                                {%   set p= 0   %}
+                                {%   set t= 0   %}
                                 {% for avi in avis %}
                                     <tr>
                                         {#<td style="font-weight: bolder">{{ avi.numeroutilisateur }}</td>
@@ -67,16 +92,32 @@
                                         <td>{{ avi.numeroutilisateur.nomclient}} </td>
                                         <td>{{ avi.idcategorie.nomcategorie }}</td>
                                         <td>{{ avi.contenuavis }}</td>
-                                         {% if avi.idrep != NULL %}               <td>{{ avi.idrep.etat }}</td>
+                                        {% if avi.idcategorie.nomcategorie == 'Avis' %}
+                                            {%   set a= a+1   %}
+                                        {% elseif avi.idcategorie.nomcategorie == 'Requette' %}
+                                            {%   set r= r+1   %}
+                                        {% elseif avi.idcategorie.nomcategorie == 'Réclamation' %}
+                                            {%   set c= c+1   %}
+                                        {% elseif avi.idcategorie.nomcategorie == 'Proposition' %}
+                                            {%   set p= p+1   %}
+                                        {% else %}
+                                            {%   set t= t+1   %}
+                                        {% endif %}
+
+
+                                    {% if avi.idrep != NULL %}
                                         {% if avi.idrep.etat == 'Traité' %}
                                             {%   set x= x+1   %}
-
+                                            <td>Traité</td>
                                         {% elseif avi.idrep.etat == 'en cours de traitement' %}
                                             {%   set y= y+1   %}
+                                            <td>En cours</td>
                                         {% endif %}
-                                         {% else %} <td>Non Traité</td>   {%   set z= z+1   %}
-                                           {% endif %}
-                                        <td>{{ avi.dateajout ? avi.dateajout|date('Y-m-d') : '' }}</td>
+                                    {% else %}
+                                        <td>Non Traité</td>
+                                         {%   set z= z+1   %}
+                                   {% endif %}
+                                        <td style="text-align: center">{{ avi.dateajout ? avi.dateajout|date('Y-m-d') : '' }} <br><h6 style="color: white">.</h6></td>
                                         {#  <td> <button style="background-color: initial;font-weight: bolder" class="btn btn-primary"> <a   href="{{ path('app_avis_edit', {'idavis': avi.idavis}) }}">Modifier</a> </button></td>
                                         #}
                                         </tr>
@@ -97,31 +138,29 @@
 
                     <!-- End Table with stripped rows -->
                     <br>
-                    <div class="search-bar" >
-                        <form class="search-form d-flex align-items-center" action="{{ path('app_avis_index_1') }}" method="post">
-                            <input style="background-color: initial;font-weight: bolder;color: #0a58ca" class="btn btn-primary" type="text" name="query" placeholder="Recherche par avis" title="Enter search keyword">
-                            <button style="background-color: initial;font-weight: bolder;color: #0a58ca" class="btn btn-primary" type="submit" title="Search"><i class="bi bi-search"></i></button>
-                        </form >
-                    </div>
+
+
 
                 </div>
             </div>
 
         </div>
     </div>
-</section>
+         </section>
 
 
-        <div class="row" style="margin-right: 35px;">
+  <div class="row" style="margin-right: 35px;">
 
 
-            <h1 style="color: #0a53be;text-align: center">Traitement des avis</h1>
+            <h1 class="col-sm-4" style="color: #0a53be;text-align: center">Categories des avis</h1>
+      <h1 class="col-sm-7" style="color: #0a53be;text-align: center">Traitements des avis</h1>
             <div class="card col-sm-5" style="margin-right: 40px;margin-left: 60px">
+
                 <div class="card-body">
 
                     <br>
                     <!-- Radar Chart -->
-                    <canvas id="radarChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 398.889px; width: 462.222px;" width="416" height="359"></canvas>
+                    <canvas id="radarChart" style="max-height: 1000px; display: block; box-sizing: border-box; height: 398.889px; width: 462.222px;" width="416" height="359"></canvas>
                     <script>
                         document.addEventListener("DOMContentLoaded", () => {
                             new Chart(document.querySelector('#radarChart'), {
@@ -129,19 +168,25 @@
                                 data: {
                                     labels: [
                                         '.',
-                                        'En cours',
+                                        'avis simple',
                                         '.',
-                                        'Traité',
+                                        'requette',
                                         '.',
-                                        'Non Traité'
+                                        'reclamation',
+                                        '.',
+                                        'proposition',
+                                        '.',
+                                        'autre',
+
+
 
 
                                     ],
                                     datasets: [{
-                                        label: 'Etat',
-                                        data: [0,{{x}},0, {{y}},0, {{z}}],
+                                        label: 'Nombre',
+                                        data: [-1,{{a}},-1,{{r}},-1,{{c}},-1,{{p}},-1,{{t}}],
                                         fill: true,
-                                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                        backgroundColor: 'rgba(255, 99, 132, 0)',
                                         borderColor: 'rgb(255, 99, 132)',
                                         pointBackgroundColor: 'rgb(255, 99, 132)',
                                         pointBorderColor: '#fff',
@@ -163,13 +208,18 @@
 
                 </div>
             </div>
+
+
+
+
+
             <div class="card col-sm-5">
 
             <div class="card-body">
 
                 <br>
                 <!-- Polar Area Chart -->
-                <canvas id="polarAreaChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 398.889px; width: 462.222px;" width="416" height="359"></canvas>
+                <canvas id="polarAreaChart" style="max-height: 1000px; display: block; box-sizing: border-box; height: 398.889px; width: 462.222px"></canvas>
                 <script>
                     document.addEventListener("DOMContentLoaded", () => {
                         new Chart(document.querySelector('#polarAreaChart'), {
@@ -199,7 +249,22 @@
                 <!-- End Polar Area Chart -->
 
             </div>
+
+            </div>
+
+
+
+
+
         </div>
+
+
+
+
+
+
+
     </div>
     </main><!-- End #main -->
+
 {% endblock %}

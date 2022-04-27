@@ -23,7 +23,7 @@
                                 <tr>
 
                                     <th scope="col" data-sortable="" style="width: 10%;">
-                                    <a href="#" class="dataTable-sorter"><h4 style="color: #0a53be;font-weight: bolder">Etat</h4></a>
+                                    <a href="#" class="dataTable-sorter"><h4 style="color: #0a53be;font-weight: bolder">Client</h4></a>
                                     </th>
                                     <th scope="col" data-sortable="" style="">
                                         <a href="#" class="dataTable-sorter"><h4 style="color: #0a53be;font-weight: bolder">Avis</h4></a>
@@ -35,11 +35,11 @@
                                         <a href="#" class="dataTable-sorter"><h4 style="color: #0a53be;font-weight: bolder">Date</h4></a>
                                     </th>
 
-                                    <th scope="col" data-sortable="" style="width: 2%;">
-
+                                    <th style="width: 5%;border-left: solid 1px lightgray;border-right: solid 1px lightgray">
+                                        <a href="#"><h4 style="color: #0a53be;font-weight: bolder">Traiter</h4></a>
                                     </th>
-                                    <th scope="col" data-sortable="" style="width: 2%;">
-
+                                    <th style="width: 5%;border-right: solid 1px lightgray">
+                                        <a href="#"><h4 style="color: #0a53be;font-weight: bolder;">Supp</h4></a>
                                     </th>
 
                                 </tr>
@@ -47,25 +47,45 @@
                                 <tbody>
                                 {% for repavi in repavis %}
                                     <tr>
-
-                                        <td>{{ repavi.etat }}</td>
-
+{#                                        {% if repavi.etat == 'en cours de traitement' %}#}
+{#                                            <td>En cours</td>#}
+{#                                       {% else %}#}
+{#                                           <td>{{ repavi.etat }}</td>#}
+{#                                        {% endif %}#}
+                                        <td> {{ repavi.idavis.numeroutilisateur.nomclient }}  </td>
                                         <td>{{ repavi.idavis }}</td>
                                         <td>{{ repavi.reponse }}</td>
                                         <td>{{ repavi.dateajout ? repavi.dateajout|date('Y-m-d') : '' }}</td>
 
-                                        <td>    {% if repavi.etat == 'en cours de traitement' %}
-                                            <button style="background-color: initial;font-weight: bolder;color: white" class="btn btn-primary">
 
-                                                <a  href="{{ path('app_repavis_edit2', {'idrep': repavi.idrep}) }}">Traiter</a> </button>
-                                             {% else %}
-                                            <button style="background-color: initial;font-weight: bolder;color:white;" class="btn btn-primary">
-                                            <====></button>
-                                            {% endif %}
+                                            {% if repavi.etat == 'en cours de traitement' %}
+                                        <td style="text-align: right;border-left: solid 1px lightgray;border-right: solid 1px lightgray" >
+
+
+                                        <button style="color:green;border-color: white;background-color: white" class="btn btn-primary">
+                                                    <a style="background-color: #0a53be;border-color: white" class="btn btn-primary" href="{{ path('app_repavis_edit2', {'idrep': repavi.idrep}) }}">
+                                                        <i class="bx bx-x"> </i>
+                                                    </a></button>
                                         </td>
 
+                                            {% else %}
+                                        <td style="text-align: right;border-left: solid 1px lightgray ;border-right: solid 1px lightgray" >
+                                                <button style="color:#0c5460;border-color: white;background-color: white" class="btn btn-primary">
+                                                    <a class="btn btn-primary" style="background-color: #1e7e34;border-color: white;">
+                                                        <i class="bx bx-check"> </i>
+                                                    </a></button>
+                                        </td>
+                                            {% endif %}
 
-                                        <td>  {{ include('repavis/_delete_form.html.twig') }}</td>
+
+
+                                        <td style="text-align: right;border-right: solid 1px lightgray">
+
+                                            {% include 'repavis/_delete_form.html.twig' %}
+                                     </td>
+
+
+
                                     </tr>
 
                                 {% else %}

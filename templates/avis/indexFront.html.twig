@@ -1,7 +1,13 @@
 
 {% extends 'base-front.html.twig' %}
 
+{#
 
+rgba(255,255,255, 0.9)
+rgba(255,255,255, 0.9)
+rgba(160, 4, 152,0.8)
+
+#}
 
 {% block body %}
 
@@ -17,7 +23,7 @@
                         <a href="" style="color: black">Home</a>
                         <i>|</i>
                     </li>
-                    <li><a href="{{ path('app_avis_indexFront') }}" style="color: #d43934" >Les avis</a></li>
+                    <li><a href="{{ path('app_avis_indexFront') }}" style="color: red" >Les avis</a></li>
 
 
                 </ul>
@@ -27,7 +33,7 @@
     <!-- //banner -->
 
     <!-- top avis -->
-    <div class="join-w3l1 py-sm-5 py-4" style="text-align: left;">
+    <div class="join-retro py-sm-5 py-4" style="text-align: left;">
 
         <div class="ads-grid py-sm-5 py-4" style="margin-top: -100px">
             <div class="container py-xl-4 py-lg-2">
@@ -36,47 +42,49 @@
 
                     <!-- avis left -->
                     <div class="agileinfo-ads-display col-lg-9">
-                        <div class="wrapper">
-                            <h3 class="tittle-w3l text-center  mb-sm-4 mb-3" style="background-color: whitesmoke;text-align: center;border-radius:30px 30px;background-color: white">
+                        <div class="px-sm-4 px-3 py-sm-3  py-3 mt-2" style="border-radius: 15px 15px">
 
-                                <span>N</span>os
-                                <span>A</span>vis</h3>
+                            <h3 class="product-sec1 tittle-w3l text-center  mb-sm-4 mb-3" style="text-align: center;border-radius:30px 30px;background-color: rgba(255,255,255, 0.9);color: black">
+
+                                <span style="color: rgba(160, 4, 152,0.8)">N</span>os
+                                <span style="color: rgba(160, 4, 152,0.8) ">A</span>vis</h3>
 
 
 
                             {% for avi in avis %}
 
-                                <div class="side-bar px-sm-4 px-1 py-sm-4  py-3 mt-3"  style="border-radius:30px 30px;background-color: whitesmoke">
+                                <div class="product-sec1 px-sm-4 px-3 py-sm-3  py-3 mt-2"  style="border-radius:30px 30px;background-color: rgba(255,255,255, 0.9);margin-bottom: 20px ">
 
-                                    <h6 class="text-lg-right" style="color: #0a58ca">  {{ avi.dateajout |date('d-m-Y') }} </h6>
+                                    <h6 class="text-lg-right" style="color: black;font-weight: bolder">  {{ avi.dateajout |date('d-m-Y') }} </h6>
 
 
 
-                                    <h5 style="color: #0a58ca;font-weight: bolder"> {{ avi.idcategorie.nomcategorie }} du client </h5>
+                                    <h4 style="color: black;font-weight: bolder;text-shadow: 1px 1px 2px rgba(160, 4, 152,0.8)"> {{ avi.idcategorie.nomcategorie }} du client :<br>{{ avi.numeroutilisateur.nomclient }} : </h4>
 
-                                    <h5 style="color: #0a58ca">   {{ avi.numeroutilisateur.nomclient }} :</h5>
+
                                     <br>
 
 
 
 
-                                    <h6  style="color: black">  {{ avi.contenuavis }}  </h6>
+                                    <h5  style="color: black">  {{ avi.contenuavis }}  </h5>
                                     <br>
                                     {% if avi.numeroutilisateur  %}
 
-                                        <div class="row" > <h6 style="margin-left: auto;margin-right: 10px;" class="text-lg-right"> <a href="{{ path('app_avis_edit2', {'idavis': avi.idavis}) }}">
+                                        <div class="row"> <h6 style="margin-left: auto;margin-right: 10px;" class="text-lg-right"> <a href="{{ path('app_avis_edit2', {'idavis': avi.idavis}) }}">
 
-                                                    <button class="btn btn-primary" style="color:#0a58ca;background-color: initial;border: 1px solid rgba(0, 0, 255, 0.2);border-radius:30px 30px;">Modifier </button>   </a> </h6>
+                                                    <button class="product-sec1 btn btn-primary" style="color:black;background-color: rgba(160, 4, 152,0.8);border-radius:30px 30px;border: 1px solid black">Modifier </button>   </a> </h6>
                                             {% include 'avis/_delete_form.html.twig' %}  </div>
 
                                     {% endif %}
 
-                                    {% if avi.idrep != NULL %}  <div class="product-sec1 px-sm-4 px-3 py-sm-3  py-3 mt-2" style="border: 1px solid rgba(0, 0, 255, 0.2);border-radius:30px 30px;" >
-                                        <h6 class="text-lg-right" style="color:#0a58ca;">  {{ avi.idrep.dateajout |date('d-m-Y') }} </h6>
-                                        <h5 style="color: #d43934;font-weight: bolder"> Réponse de l'administration :</h5>
+                                    {% if avi.idrep != NULL %}  <div class="px-sm-4 px-3 py-sm-3  py-3 mt-2" style="border: 1px solid black;border-radius:30px 30px;
+                                    box-shadow: 0px 0px 300px 0px rgba(160, 4, 152,1);" >
+                                        <h6 class="text-lg-right" style="color:black;font-weight: bolder">  {{ avi.idrep.dateajout |date('d-m-Y') }} </h6>
+                                        <h5 style="color: black;font-weight: bolder;text-shadow: 1px 1px 2px rgba(160, 4, 152,0.8)"> Réponse de l'administration :</h5>
                                         <h6 style="color: black">  {{ avi.idrep.reponse }} </h6>
                                         <br>
-                                        <h6 style="color: #0a53be;text-align: right">  {{ avi.idrep.etat }} </h6>
+                                        <h6 style="color: black;text-align: right">  {{ avi.idrep.etat }} </h6>
 
 
                                     </div> {% endif %}
@@ -87,23 +95,26 @@
 
                             {% endfor %}
 
+                            <h3 class="product-sec1 tittle-w3l text-center  mb-sm-4 mb-3" style="text-align: center;border-radius:30px 30px;background-color: rgba(255,255,255, 0.9);color: black">
+                            {{ knp_pagination_render(avis) }} </h3>
+
 
 
                         </div>
                     </div>
                     <!-- //avis left -->
                     <!-- avis right -->
-                    <div class="col-lg-3 mt-lg-0 mt-4 p-lg-0" style="border-radius:30px 30px;background-color: whitesmoke">
-                        <div class="side-bar p-sm-4 p-3" style="border-radius:30px 30px;">
+                    <div class="col-lg-3 mt-lg-0 mt-4 p-lg-0" style="border-radius:30px 30px;">
+                        <div class="product-sec1 side-bar p-sm-4 p-3" style="border-radius:30px 30px;background-color: rgba(255,255,255, 0.9);height: 100%;">
 
                             <!-- btn ajout -->
-                            <div style="border-bottom: 1px solid #d43934;margin-top: -20px">
+                            <div style="border-bottom: 1px solid black;margin-top: -20px;margin-bottom: 10px">
                                 <br>
                                 <ul>
 
-                                    <li style="background-color: whitesmoke;font-weight: bolder;border-color: #0a53be;" class="btn btn-primary">
-                                        <a href="{{ path('app_avis_new') }}"  style="color: #0a53be">
-                                            <i></i> <h3>Ajouter votre avis</h3> </a>
+                                    <li style="border-radius:30px 30px;border: 1px solid black;padding-bottom: 10px;background-color: rgba(160, 4, 152,0.8)" class="btn btn-primary">
+                                        <a href="{{ path('app_avis_new') }}" >
+                                            <i> <h3 style="color: black;font-weight: bolder">Ajouter votre avis</h3></i> </a>
                                     </li>
 
                                 </ul> <br>
@@ -112,17 +123,17 @@
                             <!-- //btn ajout -->
 
                             <!-- btn recherche -->
-                            <div class="search-hotel border-bottom py-2"  >
+                            <div class="search-hotel py-2"  >
 
 
                                 <div class="customer-rev left-side py-2" >
                                     <form class="search-form d-flex align-items-center" action="{{ path('app_avis_indexFront_1') }}" method="post">
                                                    <ul>
                                                        <li>
-                                                <h4>
-                                                    <select name="query" style="background-color: initial;border-color: #0a53be;color: #0a53be;"   method="post">
-                                                        <option HIDDEN SELECTED value="" style="color: #0a53be">->Recherche<-</option>
-                                                        <optgroup label="Categories" style="color: #d43934">
+                                                <h3 style="font-weight: bolder;border-bottom: 1px solid black;padding-bottom: 20px;">
+                                                    <select name="query" style="background-color: rgba(160, 4, 152,0.8);border-radius:30px 30px;border: 1px solid black;font-weight: bolder;font-size: 28px;text-align: left;color: black;padding-bottom: 10px" class="btn btn-primary">
+                                                        <option HIDDEN SELECTED value="">->Recherche<-</option>
+                                                        <optgroup label="Categories">
 
                                                             <option value="Requette">Requette</option>
                                                             <option value="Réclamation">Réclamation</option>
@@ -132,7 +143,7 @@
                                                             <option value="TestCatégorie">Autres</option>
 
                                                         </optgroup>
-                                                        <optgroup label="Avis" style="color: #0a53be">
+                                                        <optgroup label="Avis">
                                                             <option value="">Repondu</option>
                                                             <option value="Traité">Traité</option>
                                                             <option value="en cours de traitement">En cours</option>
@@ -140,28 +151,30 @@
 
 
                                                     </select>
+                                                    <button type="submit" style="background-color: rgba(160, 4, 152,0.8);color: black;border-color: black;font-weight: bolder;font-size: 10px;border-radius: 15px 15px" class="btn btn-primary">
+                                                        ---/-\-\--/\--/-/-\---/--\---\-/---/-\\-/---/--\---\-/--\---
+                                                    </button>
+                                                    </h3>
 
-                                                    <button type="submit" style="color: #0a53be;background-color: initial;padding-top: 15px;padding-bottom: 18px;border-color: #0a53be;" class="btn btn-primary fas fa-sign-out-alt"   >
-                                                    </button>  </h4>
-                                            </li>
+                                                       </li>
                                         </ul>
                                     </form >
                                 </div>
                             </div>
                             <!-- //btn recherche -->
 
-
-
                             <!-- Avis scroll -->
-                            <div class="f-grid py-2" style="border: 1px solid #d43934;border-radius: 15px">
+                            <div class="f-grid py-2" style="border: 1px solid black;border-radius: 15px">
 
                                 <ul>
 
-                                    <h3 style="text-align: center;color: #0a53be;margin-top: 10px;margin-bottom: 10px">     Les avis    </h3>
+                                    <h3 class="tittle-w3l text-center  mb-sm-4 mb-3" style="text-align: center;color: black;margin-top: 10px;margin-bottom: 10px;font-weight: bolder">
+                                         <span style="color: rgba(160, 4, 152,0.8)">
+L</span>es<span style="color: rgba(160, 4, 152,0.8)"> A</span>vis  </h3>
 
                                 </ul>
 
-                                <div class="box-scroll" style="border-top: #d43934;height: 3000px;border-bottom: 1px solid #d43934;border-top: 1px solid #d43934;background-color: white">
+                                <div class="box-scroll" style="background-color: rgba(160, 4, 152,0.8);border-top: black;height: 100%;border-bottom: 1px solid black;border-top: 1px solid black;height: 500px;">
 
                                     <div class="scroll">
 
@@ -170,8 +183,8 @@
 
                                                 <div class="left-side border-bottom py-4">
                                                     <div>
-                                                        <ul>
-                                                            >>  {{ avi.contenuavis }}
+                                                        <ul style="color:black;">
+                                                            =>  {{ avi.contenuavis }}
                                                         </ul>
                                                     </div>
 
@@ -187,9 +200,6 @@
                                     </div>
                                 </div>
                                 <br>
-                                {#                        <button style="background-color: initial;font-weight: bolder;border-color: #d43934" class="btn btn-primary">#}
-                                {#                            <a href="{{ path('app_avis_new') }}"  style="color: #d43934;"> Ajouter avis </a> </button>#}
-                                {#                       #}
 
 
                             </div>
@@ -208,20 +218,20 @@
     <!-- //top avis -->
 
     <!-- publicité -->
-    <div class="join-w3l1 py-sm-5 py-4">
+    <div class="join-retro py-sm-5 py-4">
         <div class="container py-xl-4 py-lg-2">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="join-agile text-left p-4">
                         <div class="row">
                             <div class="col-sm-7 offer-name">
-                                <h6>Smooth, Rich & Loud Audio</h6>
-                                <h4 class="mt-2 mb-3">Branded Headphones</h4>
-                                <p>Sale up to 25% off all in store</p>
+                                <h6>Game room</h6>
+                                <h4 class="mt-2 mb-3">PinBall machine</h4>
+                                <p>A partir de 2000d</p>
                             </div>
                             <div class="col-sm-5 offerimg-w3l">
                                 <img src="
-{{asset('front-office/images/off1.png')}}" alt="" class="img-fluid">
+{{asset('front-office/images/pinball.jpg')}}" alt="" class="img-fluid">
                             </div>
                         </div>
                     </div>
@@ -230,13 +240,13 @@
                     <div class="join-agile text-left p-4">
                         <div class="row ">
                             <div class="col-sm-7 offer-name">
-                                <h6>A Bigger Phone</h6>
-                                <h4 class="mt-2 mb-3">Smart Phones 5</h4>
-                                <p>Free shipping order over $100</p>
+                                <h6>SAGA games</h6>
+                                <h4 class="mt-2 mb-3">Street fighter 2</h4>
+                                <p>Presque gratuit juste 150d</p>
                             </div>
                             <div class="col-sm-5 offerimg-w3l">
                                 <img src="
-{{asset('front-office/images/off2.png')}}" alt="" class="img-fluid">
+{{asset('front-office/images/retropup2.jpg')}}" alt="" class="img-fluid">
                             </div>
                         </div>
                     </div>

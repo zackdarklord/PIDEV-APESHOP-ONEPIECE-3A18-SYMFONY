@@ -43,6 +43,7 @@
     <body>
       {%  block header %}
       <!-- ======= Header ======= -->
+
       <header id="header" class="header fixed-top d-flex align-items-center">
 
           <div class="d-flex align-items-center justify-content-between">
@@ -313,46 +314,28 @@
 
                   <li class="nav-item">
                       <a class="nav-link " data-bs-target="#components-nav1" data-bs-toggle="collapse" href="#">
-                          <i class="bi bi-menu-button-wide"></i><span>Gestion Avis/Categories</span><i class="bi bi-chevron-down ms-auto"></i>
+                          <i class="bi bi-menu-button-wide"></i><span>Gestion Avis/Reponse</span><i class="bi bi-chevron-down ms-auto"></i>
                       </a>
                       <ul id="components-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                           <li>
                               <a href="{{ path('app_avis_index') }}">
-                                  <i class="bi bi-circle"></i><span>Liste des Avis</span>
+                                  <i class="bi bi-circle"></i><span>Avis</span>
+                              </a>
+                          </li>
+                          <li>
+                              <a href="{{ path('app_repavis_index') }}">
+                                  <i class="bi bi-circle"></i><span>Reponses</span>
                               </a>
                           </li>
                           <li>
                               <a href="{{ path('app_categoriea_index') }}">
-                                  <i class="bi bi-circle"></i><span>Liste des Categories</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="{{ path('app_categoriea_new') }}">
-                                  <i class="bi bi-circle"></i><span>Ajout d'une Categorie</span>
+                                  <i class="bi bi-circle"></i><span>Categories</span>
                               </a>
                           </li>
 
                       </ul>
                   </li><!-- End Components Nav -->
-                  <li class="nav-item">
-                      <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                          <i class="bi bi-menu-button-wide-fill"></i><span>Gestion Reponse</span><i class="bi bi-chevron-down ms-auto"></i>
-                      </a>
-                      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
-                          <li>
-                              <a href="{{ path('app_repavis_index') }}">
-                                  <i class="bi bi-circle"></i><span>Liste des Reponse</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="{{ path('app_repavis_new') }}">
-                                  <i class="bi bi-circle"></i><span>Ajout d'une Reponse</span>
-                              </a>
-                          </li>
-
-                      </ul>
-                  </li><!-- End Components Nav -->
                   <li class="nav-item">
                       <a class="nav-link collapsed" href="{{ path('app_avis_indexFront') }}">
                           <i class="bi bi-grid"></i>

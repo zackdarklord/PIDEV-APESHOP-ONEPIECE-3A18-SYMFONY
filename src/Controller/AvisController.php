@@ -8,6 +8,7 @@ use App\Form\AvisType;
 use App\Form\AvisType2;
 use App\Repository\AvisRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,13 +46,15 @@ class AvisController extends AbstractController
     /**
      * @Route("/Front", name="app_avis_indexFront", methods={"GET"})
      */
-      public function indexFront(EntityManagerInterface $entityManager): Response
+      public function indexFront(EntityManagerInterface $entityManager,Request $request,PaginatorInterface $paginator): Response
       {
-          $avis = $entityManager
-
+          $donnees = $entityManager
               ->getRepository(Avis::class)
-              ->findAll();
+            ->findAll();
+          $avis =$paginator->paginate(
+              $donnees,$request->query->getInt('page',1),5
 
+          );
           return $this->render('avis/indexFront.html.twig', [
               'avis' => $avis,
           ]);
@@ -59,13 +62,47 @@ class AvisController extends AbstractController
     /**
      * @Route("/Front", name="app_avis_indexFront_1", methods={"post"})
      */
-    public function indexRechercher2(AvisRepository $avisRepository): Response
-    {
+    public function indexRechercher2(AvisRepository $avisRepository,Request $request,PaginatorInterface $paginator): Response
+    {     $data=$avisRepository->findByUser($_POST['query']);
+
+        $avis =$paginator->paginate(
+            $data,$request->query->getInt('page',1),count($data)
+
+        );
 
         return $this->render('avis/indexFront.html.twig', [
-            'avis' => $avisRepository->findByUser($_POST['query']),
+            'avis' => $avis,
         ]);
     }
+//    /**
+//     * @Route("/Front", name="app_avis_indexFront_1", methods={"post"})
+//     */
+//    public function indexRechercher2(AvisRepository $avisRepository): Response
+//    {
+//
+//        return $this->render('avis/indexFront.html.twig', [
+//            'avis' => $avisRepository->findByUser($_POST['query']),
+//        ]);
+//    }
+
+//    /**
+//     * @Route("/Front", name="app_avis_indexFront_1", methods={"post"})
+//     */
+//    public function indexRechercher2(AvisRepository $avisRepository,Request $request,PaginatorInterface $paginator): Response
+//    {
+//        $donnees =$this->getDoctrine()->getRepository(Avis::class)->findAll();
+////        $donnees =$this->getDoctrine()->getManager()->getRepository(Avis::class)->findAll();
+//        $Avis =$paginator->paginate(
+//            $donnees,$request->query->getInt('page',1),5
+//
+//        );
+//        return $this->render('avis/indexFront.html.twig', [
+//            'avis' => $avisRepository->findByUser($_POST['query']),
+//        ]);
+//    }
+
+
+
     /**
      * @Route("/Front", name="app_avis_indexFront_2", methods={"post"})
      */

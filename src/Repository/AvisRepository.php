@@ -64,8 +64,8 @@ class AvisRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('u')
             ->join('u.idcategorie', 'r')
             ->join('u.idrep','x')
-            ->where('r.nomcategorie LIKE :val')
-            ->orWhere('x.etat LIKE :val2')
+            ->where('r.nomcategorie LIKE :val2')
+            ->orWhere('x.etat LIKE :val')
 
             ->setParameters(array('val'=> $value.'%', 'val2' => $value))
             ->orderBy('u.numeroutilisateur', 'ASC')
@@ -76,14 +76,15 @@ class AvisRepository extends ServiceEntityRepository
     public function findByUser2($value)
     {
         return $this->createQueryBuilder('u')
-
-            ->where('u.contenuavis LIKE :val')
-            ->orWhere('u.contenuavis LIKE :val2')
+            ->join('u.numeroutilisateur', 'r')
+            ->join('u.idcategorie', 'c')
+            ->where('r.nomclient LIKE :val')
+            ->orWhere('r.nomclient LIKE :val2')
 
 //            ->setParameter('val', '%'.$value.'%' )
 //            ->setParameter('val2', $value.'%','%'.$value.'%')
             ->setParameters(array('val'=> '%'.$value.'%', 'val2' => $value.'%'))
-            ->orderBy('u.numeroutilisateur', 'ASC')
+            ->orderBy('c.nomcategorie', 'ASC')
             ->getQuery()
             ->getResult()
             ;
@@ -93,9 +94,7 @@ class AvisRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('u')
             ->join('u.idrep', 'r')
             ->where('r.etat LIKE :val')
-
             ->setParameter('val', $value.'%' )
-
             ->orderBy('u.numeroutilisateur', 'ASC')
             ->getQuery()
             ->getResult()

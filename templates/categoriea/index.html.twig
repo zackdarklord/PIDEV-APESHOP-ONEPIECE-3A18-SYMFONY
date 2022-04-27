@@ -23,15 +23,15 @@
                              <thead>
                              <tr>
 
-                                 <th scope="col" data-sortable="" ">
-                                     <a href="#" class="dataTable-sorter"><h4 style="color: #0a53be;font-weight: bolder">Nom de la categorie </h4></a>
+                                 <th scope="col" data-sortable="" >
+                                     <a href="#" class=""><h4 style="color: #0a53be;font-weight: bolder">Nom de la categorie </h4></a>
                                  </th>
 
-                                 <th scope="col" data-sortable="" style="width: 10%;">
-
+                                 <th style="width: 5%;border-left: solid 1px lightgray;border-right: solid 1px lightgray">
+                                     <a href="#"><h4 style="color: #0a53be;font-weight: bolder">Modifier</h4></a>
                                  </th>
-                                 <th scope="col" data-sortable="" style="width: 10%;">
-
+                                 <th style="width: 5%;border-right: solid 1px lightgray">
+                                     <a href="#"><h4 style="color: #0a53be;font-weight: bolder;">Supprimer</h4></a>
                                  </th>
 
                              </tr>
@@ -44,9 +44,13 @@
 
 
 
-                                         <td> <button style="background-color: initial;font-weight: bolder" class="btn btn-primary"> <a href="{{ path('app_categoriea_edit', {'idcategorie': categoriea.idcategorie}) }}">Modifier</a></button></td>
 
-                                        <td>  {{ include('categoriea/_delete_form.html.twig') }}</td>
+
+                                         <td style="border-left: solid 1px lightgray;border-right: solid 1px lightgray;text-align: center">  <button style="color:#0c5460;border-color: white;background-color: white" class="btn btn-primary">
+                                             <a class="btn btn-primary" style="background-color: #1e7e34;border-color: white;" href="{{ path('app_categoriea_edit', {'idcategorie': categoriea.idcategorie}) }}">
+                                                 <i class="bx bx-edit"> </i>
+                                             </a></button></td>
+                                        <td style="border-right: solid 1px lightgray;text-align: center">  {{ include('categoriea/_delete_form.html.twig') }}</td>
                                      </tr>
                                     {% else %}
                                         <tr>
