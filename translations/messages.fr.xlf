@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="OWlXXDz" resname="Offer Zone Top Deals &amp; Discounts">
+        <source>Offer Zone Top Deals &amp; Discounts</source>
+        <target><![CDATA[Zone d'offres Meilleures offres & Réductions]]></target>
+      </trans-unit>
+      <trans-unit id="PIIDP46" resname="Select Location">
+        <source>Select Location</source>
+        <target>sélectionnez l'emplacement</target>
+      </trans-unit>
+      <trans-unit id="c6dWUwZ" resname="Track Order">
+        <source>Track Order</source>
+        <target>Suivi de commande</target>
+      </trans-unit>
+      <trans-unit id="Le1KPuZ" resname="Log In">
+        <source>Log In</source>
+        <target>connexion</target>
+      </trans-unit>
+      <trans-unit id="u3I07BJ" resname="Register">
+        <source>Register</source>
+        <target>S'inscrire</target>
+      </trans-unit>
+      <trans-unit id="AaHpFUv" resname="Please Select Your Location">
+        <source>Please Select Your Location</source>
+        <target>veuillez sélectionner votre emplacement</target>
+      </trans-unit>
+      <trans-unit id="cxUXcpb" resname="Zone d'offres Meilleures offres &amp;amp; Réductions">
+        <source>Zone d'offres Meilleures offres &amp;amp; Réductions</source>
+        <target><![CDATA[__Zone d'offres Meilleures offres &amp; Réductions]]></target>
+      </trans-unit>
+      <trans-unit id="ScJmuqq" resname="Search">
+        <source>Search</source>
+        <target>recherche</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>acceuil</target>
+      </trans-unit>
+      <trans-unit id="eunCPWW" resname="Electronics">
+        <source>Electronics</source>
+        <target>Electroniques</target>
+      </trans-unit>
+      <trans-unit id="uKt9Tnd" resname="Appliances">
+        <source>Appliances</source>
+        <target> électroménagers</target>
+      </trans-unit>
+      <trans-unit id="XYxxq8U" resname="About Us">
+        <source>About Us</source>
+        <target>apropos </target>
+      </trans-unit>
+      <trans-unit id="0PQ2XLp" resname="New Arrivals">
+        <source>New Arrivals</source>
+        <target>nouveautées</target>
+      </trans-unit>
+      <trans-unit id="47DEQpj" resname="">
+        <source></source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="oQk.hzL" resname="Electronics :">
+        <source>Electronics :</source>
+        <target>electronique :</target>
+      </trans-unit>
+      <trans-unit id="3gCfrM0" resname="If you're considering a new laptop, looking for a powerful new car stereo or shopping for a new HDTV, we make it easy to&#10;                    find exactly what you need at a price you can afford. We offer Every Day Low Prices on TVs, laptops, cell phones, tablets&#10;                    and iPads, video games, desktop computers, cameras and camcorders, audio, video and more.">
+        <source>If you're considering a new laptop, looking for a powerful new car stereo or shopping for a new HDTV, we make it easy to
+                    find exactly what you need at a price you can afford. We offer Every Day Low Prices on TVs, laptops, cell phones, tablets
+                    and iPads, video games, desktop computers, cameras and camcorders, audio, video and more.</source>
+        <target>Si vous envisagez un nouvel ordinateur portable, recherchez un nouvel autoradio puissant ou magasinez pour un nouveau téléviseur HD, nous vous permettons de trouver facilement exactement ce dont vous avez besoin à un prix abordable. Nous proposons des prix bas tous les jours sur les téléviseurs, les ordinateurs portables, les téléphones portables, les tablettes et les iPad, les jeux vidéo, les ordinateurs de bureau, les appareils photo et les caméscopes, l'audio, la vidéo et plus encore.</target>
+      </trans-unit>
+      <trans-unit id=".jtY8Ud" resname="All Categories">
+        <source>All Categories</source>
+        <target>touteslescategories</target>
+      </trans-unit>
+      <trans-unit id="mLZwY8_" resname="Contact Us">
+        <source>Contact Us</source>
+        <target>contactez nous</target>
+      </trans-unit>
+      <trans-unit id="4O.QJJ0" resname="Free Shipping">
+        <source>Free Shipping</source>
+        <target>livraison gratuite</target>
+      </trans-unit>
+      <trans-unit id="Zz7UvUq" resname="Fast Delivery">
+        <source>Fast Delivery</source>
+        <target>livraison rapide </target>
+      </trans-unit>
+      <trans-unit id="G6NJ2.p" resname="Big Choice">
+        <source>Big Choice</source>
+        <target>grand choix</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
