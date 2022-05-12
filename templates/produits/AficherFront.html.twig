@@ -1,0 +1,108 @@
+{% extends 'base-front.html.twig' %}
+
+{% block body %}
+    <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
+        <h3 class="heading-tittle text-center font-italic">{% trans %}our products{% endtrans %}</h3>
+        <div class="row">
+            {% for produit in produits %}
+
+                <div class="col-md-4 product-men mt-5">
+                <div class="men-pro-item simpleCart_shelfItem">
+                    <div class="men-thumb-item text-center">
+                        <img src="/uploads/{{ produit.image }}"  height="220" alt="erreur">
+
+                    </div>
+                    <div class="item-info-product text-center border-top mt-4">
+                        <h3 class="pt-1" >
+                            <a style="color: blue" href="single.html">{{ produit.nomproduit }}</a>
+                        </h3>
+                        <div class="info-product-price my-2">
+                            <span class="item_price">{{ produit.prixunitaire }} DT</span>
+                        </div>
+                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                            <form action="#" method="post">
+                                <fieldset>
+
+
+                                    <input type="hidden" name="cmd" value="_cart" />
+                                    <input type="hidden" name="add" value="1" />
+                                    <input type="hidden" name="business" value=" " />
+                                    <input type="hidden" name="item_name" value="Samsung Galaxy J7" />
+                                    <input type="hidden" name="amount" value="200.00" />
+                                    <input type="hidden" name="discount_amount" value="1.00" />
+                                    <input type="hidden" name="currency_code" value="USD" />
+                                    <input type="hidden" name="return" value=" " />
+                                    <input type="hidden" name="cancel_return" value=" " />
+                                   {#  <a class=" {{ produit.quantite < 1  ? 'disable btn btn-secondary rounded-pill' : 'btn btn-success rounded-pill'}}" href="{{ path('app_commandes_new', {'numeroproduit': produit.numeroproduit}) }}" >COMMANDER</a>#}
+                                    {% if produit.quantite <= 0 %}
+                                    <a class=" disable btn btn-secondary rounded-pill" href="" >Ajouter au panier</a>
+                                    {% else %}
+                                        {% if app .session.get ('username') is not null %}
+                                        <a class="btn btn-success rounded-pill" href="{{ path('app_paniers_new', {'numeroproduit': produit.numeroproduit}) }}" >Ajouter au panier</a>
+                                        {%  endif %}
+                                        {%  endif %}
+
+                                    {% if produit.quantite < 1 %}
+                                        <br><span class="rupture"><small>Rupture de stock !</small></span>
+                                    {% endif  %}
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="info-product-price my-2">
+                            <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+
+{#                                <form action ="{{path('app_likes_index2')}}" method="POST">#}
+{#                                    <input type="number" name="ip" value="{{ produit.numeroproduit }}" hidden>#}
+{#                                    <button type="submit" class= "btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>#}
+{#                                    <button type="submit" class="btn" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>#}
+{#                                </form>#}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+    </div>
+    {{ knp_pagination_render(produits) }}
+    <div class="join-retro py-sm-5 py-4">
+        <div class="container py-xl-4 py-lg-2">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="join-agile text-left p-4">
+                        <div class="row">
+                            <div class="col-sm-7 offer-name">
+                                <h6>Game room</h6>
+                                <h4 class="mt-2 mb-3">PinBall machine</h4>
+                                <p>A partir de 2000d</p>
+                            </div>
+                            <div class="col-sm-5 offerimg-w3l">
+                                <img src="
+{{asset('front-office/images/pinball.jpg')}}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-lg-0 mt-5">
+                    <div class="join-agile text-left p-4">
+                        <div class="row ">
+                            <div class="col-sm-7 offer-name">
+                                <h6>SAGA games</h6>
+                                <h4 class="mt-2 mb-3">Street fighter 2</h4>
+                                <p>Presque gratuit juste 150d</p>
+                            </div>
+                            <div class="col-sm-5 offerimg-w3l">
+                                <img src="
+{{asset('front-office/images/retropup2.jpg')}}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

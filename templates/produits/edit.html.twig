@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+
+
+    {{ include('produits/_form.html.twig', {'button_label': 'Update'}) }}
+<main id="main" class="main" style="margin-top: -65px">
+    <section class="section" >
+
+    <div class="row mb-5">
+        <label class="col-sm-6 col-form-label"></label>
+        <div class="col-sm-5" style="color: black;font-weight: bolder">
+
+            <a class="btn btn-primary" href="{{ path('app_produits_sendEmail', {'numeroproduit': produit.numeroproduit}) }}">Notifier les clients</a>
+
+        </div>
+    </div>
+
+</section>
+</main>
+    {% endblock %}

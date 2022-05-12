@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Paniers
  *
  * @ORM\Table(name="paniers", indexes={@ORM\Index(name="sk_produit", columns={"numeroProduit"}), @ORM\Index(name="sk_nom", columns={"nomProduit"}), @ORM\Index(name="sk_user", columns={"numeroUtilisateur"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PaniersRepository")
  */
 class Paniers
 {
@@ -36,6 +36,26 @@ class Paniers
     private $dateajout;
 
     /**
+     * @var \Produits
+     *
+     * @ORM\ManyToOne(targetEntity="Produits", fetch="EAGER")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="numeroProduit", referencedColumnName="numeroProduit")
+     * })
+     */
+    private $numeroproduit;
+
+    /**
+     * @var \Produits
+     *
+     * @ORM\ManyToOne(targetEntity="Produits", fetch="EAGER")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="nomProduit", referencedColumnName="nomProduit")
+     * })
+     */
+    private $nomproduit;
+
+    /**
      * @var \Utilisateurs
      *
      * @ORM\ManyToOne(targetEntity="Utilisateurs")
@@ -44,26 +64,6 @@ class Paniers
      * })
      */
     private $numeroutilisateur;
-
-    /**
-     * @var \Produits
-     *
-     * @ORM\ManyToOne(targetEntity="Produits")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="numeroProduit", referencedColumnName="numeroProduit")
-     * })
-     */
-    private $numeroproduit;
-
-    /**
-     * @var \Produits
-     *
-     * @ORM\ManyToOne(targetEntity="Produits")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="nomProduit", referencedColumnName="nomProduit")
-     * })
-     */
-    private $nomproduit;
 
     public function getNumeropanier(): ?int
     {
@@ -94,18 +94,6 @@ class Paniers
         return $this;
     }
 
-    public function getNumeroutilisateur(): ?Utilisateurs
-    {
-        return $this->numeroutilisateur;
-    }
-
-    public function setNumeroutilisateur(?Utilisateurs $numeroutilisateur): self
-    {
-        $this->numeroutilisateur = $numeroutilisateur;
-
-        return $this;
-    }
-
     public function getNumeroproduit(): ?Produits
     {
         return $this->numeroproduit;
@@ -126,6 +114,18 @@ class Paniers
     public function setNomproduit(?Produits $nomproduit): self
     {
         $this->nomproduit = $nomproduit;
+
+        return $this;
+    }
+
+    public function getNumeroutilisateur(): ?Utilisateurs
+    {
+        return $this->numeroutilisateur;
+    }
+
+    public function setNumeroutilisateur(?Utilisateurs $numeroutilisateur): self
+    {
+        $this->numeroutilisateur = $numeroutilisateur;
 
         return $this;
     }

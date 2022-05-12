@@ -5,7 +5,7 @@
 
 rgba(255,255,255, 0.9)
 rgba(255,255,255, 0.9)
-rgba(160, 4, 152,0.8)
+gray
 
 #}
 
@@ -33,7 +33,7 @@ rgba(160, 4, 152,0.8)
     <!-- //banner -->
 
     <!-- top avis -->
-    <div class="join-retro py-sm-5 py-4" style="text-align: left;">
+    <div class="testimonials py-sm-5 py-4" style="text-align: left;">
 
         <div class="ads-grid py-sm-5 py-4" style="margin-top: -100px">
             <div class="container py-xl-4 py-lg-2">
@@ -46,8 +46,8 @@ rgba(160, 4, 152,0.8)
 
                             <h3 class="product-sec1 tittle-w3l text-center  mb-sm-4 mb-3" style="text-align: center;border-radius:30px 30px;background-color: rgba(255,255,255, 0.9);color: black">
 
-                                <span style="color: rgba(160, 4, 152,0.8)">N</span>os
-                                <span style="color: rgba(160, 4, 152,0.8) ">A</span>vis</h3>
+                                <span style="color: rgb(65,105,225)">N</span>os
+                                <span style="color: rgb(65,105,225) ">A</span>vis</h3>
 
 
 
@@ -59,7 +59,7 @@ rgba(160, 4, 152,0.8)
 
 
 
-                                    <h4 style="color: black;font-weight: bolder;text-shadow: 1px 1px 2px rgba(160, 4, 152,0.8)"> {{ avi.idcategorie.nomcategorie }} du client :<br>{{ avi.numeroutilisateur.nomclient }} : </h4>
+                                    <h4 style="color: black;font-weight: bolder;text-shadow: 1px 1px 2px rgb(65,105,225)"> {{ avi.idcategorie.nomcategorie }} du client :<br>{{ avi.numeroutilisateur.nomclient }} : </h4>
 
 
                                     <br>
@@ -67,21 +67,22 @@ rgba(160, 4, 152,0.8)
 
 
 
-                                    <h5  style="color: black">  {{ avi.contenuavis }}  </h5>
+                                    <h5  style="color: black    ">  {{ avi.contenuavis }}  </h5>
                                     <br>
-                                    {% if avi.numeroutilisateur  %}
+                                    {# {% if app .session.get ('username') is not null %} #}
+                                    {% if avi.numeroutilisateur.numeroutilisateurs == app.session.get('id_user') %}
 
                                         <div class="row"> <h6 style="margin-left: auto;margin-right: 10px;" class="text-lg-right"> <a href="{{ path('app_avis_edit2', {'idavis': avi.idavis}) }}">
 
-                                                    <button class="product-sec1 btn btn-primary" style="color:black;background-color: rgba(160, 4, 152,0.8);border-radius:30px 30px;border: 1px solid black">Modifier </button>   </a> </h6>
+                                                    <button class="product-sec1 btn btn-primary" style="color:white;background-color: rgb(65,105,225);border-radius:30px 30px;border: 1px solid white">Modifier </button>   </a> </h6>
                                             {% include 'avis/_delete_form.html.twig' %}  </div>
 
                                     {% endif %}
 
-                                    {% if avi.idrep != NULL %}  <div class="px-sm-4 px-3 py-sm-3  py-3 mt-2" style="border: 1px solid black;border-radius:30px 30px;
-                                    box-shadow: 0px 0px 300px 0px rgba(160, 4, 152,1);" >
+                                    {% if avi.idrep != NULL %}  <div class="px-sm-4 px-3 py-sm-3  py-3 mt-2" style="border: 1px solid white;border-radius:30px 30px;
+                                    box-shadow: 0px 0px 300px 0px rgb(65,105,225);" >
                                         <h6 class="text-lg-right" style="color:black;font-weight: bolder">  {{ avi.idrep.dateajout |date('d-m-Y') }} </h6>
-                                        <h5 style="color: black;font-weight: bolder;text-shadow: 1px 1px 2px rgba(160, 4, 152,0.8)"> Réponse de l'administration :</h5>
+                                        <h5 style="color: black;font-weight: bolder;text-shadow: 1px 1px 2px rgb(65,105,225)"> Réponse de l'administration :</h5>
                                         <h6 style="color: black">  {{ avi.idrep.reponse }} </h6>
                                         <br>
                                         <h6 style="color: black;text-align: right">  {{ avi.idrep.etat }} </h6>
@@ -95,7 +96,7 @@ rgba(160, 4, 152,0.8)
 
                             {% endfor %}
 
-                            <h3 class="product-sec1 tittle-w3l text-center  mb-sm-4 mb-3" style="text-align: center;border-radius:30px 30px;background-color: rgba(255,255,255, 0.9);color: black">
+                            <h3 class="product-sec1 tittle-w3l text-center  mb-sm-4 mb-3" style="text-align: center;border-radius:30px 30px;background-color: rgba(255,255,255, 0.9);color: white">
                             {{ knp_pagination_render(avis) }} </h3>
 
 
@@ -108,15 +109,15 @@ rgba(160, 4, 152,0.8)
                         <div class="product-sec1 side-bar p-sm-4 p-3" style="border-radius:30px 30px;background-color: rgba(255,255,255, 0.9);height: 100%;">
 
                             <!-- btn ajout -->
-                            <div style="border-bottom: 1px solid black;margin-top: -20px;margin-bottom: 10px">
+                            <div style="border-bottom: 1px solid rgb(65,105,225);margin-top: -20px;margin-bottom: 10px">
                                 <br>
                                 <ul>
-
-                                    <li style="border-radius:30px 30px;border: 1px solid black;padding-bottom: 10px;background-color: rgba(160, 4, 152,0.8)" class="btn btn-primary">
-                                        <a href="{{ path('app_avis_new') }}" >
-                                            <i> <h3 style="color: black;font-weight: bolder">Ajouter votre avis</h3></i> </a>
+                                    {% if app .session.get ('username') is not null %}
+                                    <li style="border-radius:30px 30px;border: 1px solid rgb(65,105,225);padding-bottom: 10px;background-color: rgb(65,105,225)" class="btn btn-primary">
+                                        <a href="{{ path('app_avis_new',{'id':app.session.get('id_user')}) }}" >
+                                            <i> <h3 style="color: white;font-weight: bolder">Ajouter votre avis</h3></i> </a>
                                     </li>
-
+{% endif %}
                                 </ul> <br>
 
                             </div>
@@ -130,28 +131,28 @@ rgba(160, 4, 152,0.8)
                                     <form class="search-form d-flex align-items-center" action="{{ path('app_avis_indexFront_1') }}" method="post">
                                                    <ul>
                                                        <li>
-                                                <h3 style="font-weight: bolder;border-bottom: 1px solid black;padding-bottom: 20px;">
-                                                    <select name="query" style="background-color: rgba(160, 4, 152,0.8);border-radius:30px 30px;border: 1px solid black;font-weight: bolder;font-size: 28px;text-align: left;color: black;padding-bottom: 10px" class="btn btn-primary">
+                                                <h3 style="font-weight: bolder;border-bottom: 1px solid rgb(65,105,225);padding-bottom: 20px;">
+                                                    <select name="query" style="background-color: rgb(65,105,225);border-radius:30px 30px;border: 1px solid white;font-weight: bolder;font-size: 28px;text-align: left;color: white;padding-bottom: 10px" class="btn btn-primary">
                                                         <option HIDDEN SELECTED value="">->Recherche<-</option>
-                                                        <optgroup label="Categories">
+{#                                                        <optgroup label="Categories">#}
 
-                                                            <option value="Requette">Requette</option>
-                                                            <option value="Réclamation">Réclamation</option>
-                                                            <option value="Proposition">Proposition</option>
+{#                                                            <option value="Requette">Requette</option>#}
+{#                                                            <option value="Réclamation">Réclamation</option>#}
+{#                                                            <option value="Proposition">Proposition</option>#}
 
-                                                            <option value="Avis">Avis simple</option>
-                                                            <option value="TestCatégorie">Autres</option>
+{#                                                            <option value="Avis">Avis simple</option>#}
+{#                                                            <option value="TestCatégorie">Autres</option>#}
 
-                                                        </optgroup>
-                                                        <optgroup label="Avis">
-                                                            <option value="">Repondu</option>
-                                                            <option value="Traité">Traité</option>
-                                                            <option value="en cours de traitement">En cours</option>
-                                                        </optgroup>
+{#                                                        </optgroup>#}
+{#                                                        <optgroup label="Avis">#}
+{#                                                            <option value="">Repondu</option>#}
+{#                                                            <option value="Traité">Traité</option>#}
+{#                                                            <option value="en cours de traitement">En cours</option>#}
+{#                                                        </optgroup>#}
 
 
                                                     </select>
-                                                    <button type="submit" style="background-color: rgba(160, 4, 152,0.8);color: black;border-color: black;font-weight: bolder;font-size: 10px;border-radius: 15px 15px" class="btn btn-primary">
+                                                    <button type="submit" style="background-color: rgb(65,105,225);color: rgb(65,105,225);border-color: white;font-weight: bolder;font-size: 10px;border-radius: 15px 15px" class="btn btn-primary">
                                                         ---/-\-\--/\--/-/-\---/--\---\-/---/-\\-/---/--\---\-/--\---
                                                     </button>
                                                     </h3>
@@ -164,17 +165,17 @@ rgba(160, 4, 152,0.8)
                             <!-- //btn recherche -->
 
                             <!-- Avis scroll -->
-                            <div class="f-grid py-2" style="border: 1px solid black;border-radius: 15px">
+                            <div class="f-grid py-2" style="border: 1px solid rgb(65,105,225);border-radius: 15px">
 
                                 <ul>
 
                                     <h3 class="tittle-w3l text-center  mb-sm-4 mb-3" style="text-align: center;color: black;margin-top: 10px;margin-bottom: 10px;font-weight: bolder">
-                                         <span style="color: rgba(160, 4, 152,0.8)">
-L</span>es<span style="color: rgba(160, 4, 152,0.8)"> A</span>vis  </h3>
+                                         <span style="color: rgb(65,105,225)">
+L</span>es<span style="color: rgb(65,105,225)"> A</span>vis  </h3>
 
                                 </ul>
 
-                                <div class="box-scroll" style="background-color: rgba(160, 4, 152,0.8);border-top: black;height: 100%;border-bottom: 1px solid black;border-top: 1px solid black;height: 500px;">
+                                <div class="box-scroll" style="background-color: rgb(65,105,225);border-top: rgb(65,105,225);height: 100%;border-bottom: 1px solid rgb(65,105,225);border-top: 1px solid rgb(65,105,225);height: 500px;">
 
                                     <div class="scroll">
 
@@ -183,7 +184,7 @@ L</span>es<span style="color: rgba(160, 4, 152,0.8)"> A</span>vis  </h3>
 
                                                 <div class="left-side border-bottom py-4">
                                                     <div>
-                                                        <ul style="color:black;">
+                                                        <ul style="color:white;">
                                                             =>  {{ avi.contenuavis }}
                                                         </ul>
                                                     </div>

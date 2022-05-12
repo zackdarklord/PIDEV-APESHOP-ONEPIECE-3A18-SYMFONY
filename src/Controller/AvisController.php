@@ -7,6 +7,7 @@ use App\Entity\Avis;
 use App\Form\AvisType;
 use App\Form\AvisType2;
 use App\Repository\AvisRepository;
+use App\Repository\UtilisateursRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,16 +24,16 @@ class AvisController extends AbstractController
     /**
      * @Route("/", name="app_avis_index", methods={"GET"})
      */
-     public function index(EntityManagerInterface $entityManager): Response
-     {
-         $avis = $entityManager
-             ->getRepository(Avis::class)
-             ->findAll();
+    public function index(EntityManagerInterface $entityManager): Response
+    {
+        $avis = $entityManager
+            ->getRepository(Avis::class)
+            ->findAll();
 
-         return $this->render('avis/index.html.twig', [
-             'avis' => $avis,
-         ]);
-     }
+        return $this->render('avis/index.html.twig', [
+            'avis' => $avis,
+        ]);
+    }
     /**
      * @Route("/", name="app_avis_index_1", methods={"post"})
      */
@@ -46,19 +47,19 @@ class AvisController extends AbstractController
     /**
      * @Route("/Front", name="app_avis_indexFront", methods={"GET"})
      */
-      public function indexFront(EntityManagerInterface $entityManager,Request $request,PaginatorInterface $paginator): Response
-      {
-          $donnees = $entityManager
-              ->getRepository(Avis::class)
+    public function indexFront(EntityManagerInterface $entityManager,Request $request,PaginatorInterface $paginator): Response
+    {
+        $donnees = $entityManager
+            ->getRepository(Avis::class)
             ->findAll();
-          $avis =$paginator->paginate(
-              $donnees,$request->query->getInt('page',1),5
+        $avis =$paginator->paginate(
+            $donnees,$request->query->getInt('page',1),5
 
-          );
-          return $this->render('avis/indexFront.html.twig', [
-              'avis' => $avis,
-          ]);
-      }
+        );
+        return $this->render('avis/indexFront.html.twig', [
+            'avis' => $avis,
+        ]);
+    }
     /**
      * @Route("/Front", name="app_avis_indexFront_1", methods={"post"})
      */
@@ -115,12 +116,14 @@ class AvisController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="app_avis_new", methods={"GET", "POST"})
+     * @Route("/new/{id}", name="app_avis_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,$id,UtilisateursRepository $utilisateursRepository): Response
     {
         $avi = new Avis();
+        $user=$utilisateursRepository->find($id);
         $form = $this->createForm(AvisType::class, $avi);
+        $avi->setNumeroutilisateur($user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

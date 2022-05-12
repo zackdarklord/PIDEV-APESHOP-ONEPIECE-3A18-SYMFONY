@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="47DEQpj" resname="">
+        <source></source>
+        <target>__</target>
+      </trans-unit>
+      <trans-unit id="cxUXcpb" resname="Zone d'offres Meilleures offres &amp;amp; Réductions">
+        <source>Zone d'offres Meilleures offres &amp;amp; Réductions</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="PIIDP46" resname="Select Location">
+        <source>Select Location</source>
+        <target>choisir position</target>
+      </trans-unit>
+      <trans-unit id="c6dWUwZ" resname="Track Order">
+        <source>Track Order</source>
+        <target>suivi commande</target>
+      </trans-unit>
+      <trans-unit id="Le1KPuZ" resname="Log In">
+        <source>Log In</source>
+        <target>connecter</target>
+      </trans-unit>
+      <trans-unit id="u3I07BJ" resname="Register">
+        <source>Register</source>
+        <target>s'inscrire</target>
+      </trans-unit>
+      <trans-unit id="54l7YeI" resname="show profile">
+        <source>show profile</source>
+        <target>voir profile</target>
+      </trans-unit>
+      <trans-unit id="AaHpFUv" resname="Please Select Your Location">
+        <source>Please Select Your Location</source>
+        <target>veuillez selectionner votre position</target>
+      </trans-unit>
+      <trans-unit id="ScJmuqq" resname="Search">
+        <source>Search</source>
+        <target>rechercher</target>
+      </trans-unit>
+      <trans-unit id="aoMq9J3" resname="log out">
+        <source>log out</source>
+        <target>déconnexion</target>
+      </trans-unit>
+      <trans-unit id="eunCPWW" resname="Electronics">
+        <source>Electronics</source>
+        <target>electronique</target>
+      </trans-unit>
+      <trans-unit id="te.XjwL" resname="If you're considering a new laptop, looking for a powerful new car stereo or shopping for a new HDTV, we make it easy to&#10;                find exactly what you need at a price you can afford. We offer Every Day Low Prices on TVs, laptops, cell phones, tablets&#10;                and iPads, video games, desktop computers, cameras and camcorders, audio, video and more.">
+        <source>If you're considering a new laptop, looking for a powerful new car stereo or shopping for a new HDTV, we make it easy to
+                find exactly what you need at a price you can afford. We offer Every Day Low Prices on TVs, laptops, cell phones, tablets
+                and iPads, video games, desktop computers, cameras and camcorders, audio, video and more.</source>
+        <target>Si vous envisagez un nouvel ordinateur portable, recherchez un nouvel autoradio puissant ou magasinez pour un nouveau téléviseur HD, nous vous facilitons la tâche.
+                                trouvez exactement ce dont vous avez besoin à un prix abordable. Nous offrons des prix bas tous les jours sur les téléviseurs, les ordinateurs portables, les téléphones portables, les tablettes
+                                et iPads, jeux vidéo, ordinateurs de bureau, appareils photo et caméscopes, audio, vidéo et plus encore.</target>
+      </trans-unit>
+      <trans-unit id="4O.QJJ0" resname="Free Shipping">
+        <source>Free Shipping</source>
+        <target>Livraison gratuite</target>
+      </trans-unit>
+      <trans-unit id="Zz7UvUq" resname="Fast Delivery">
+        <source>Fast Delivery</source>
+        <target>livraison rapide</target>
+      </trans-unit>
+      <trans-unit id="G6NJ2.p" resname="Big Choice">
+        <source>Big Choice</source>
+        <target>grand choix</target>
+      </trans-unit>
+      <trans-unit id="x0_VgpI" resname="our products">
+        <source>our products</source>
+        <target>nos produits</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

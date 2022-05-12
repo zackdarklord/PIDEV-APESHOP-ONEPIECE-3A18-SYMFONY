@@ -56,7 +56,7 @@ class AvisRepository extends ServiceEntityRepository
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+            ;
     }
 
     public function findByUser($value)
@@ -104,16 +104,16 @@ class AvisRepository extends ServiceEntityRepository
 
     public function update($idrep,$idavis)
     {
-$updateEtat = $this->createQueryBuilder('r')
-->update(Avis::class, 'r')
-->set('r.idrep', '?1')
-->where('r.idavis  = ?2')
-->setParameter(1, $idrep)
-->setParameter(2, $idavis)
-->getQuery();
-dump($updateEtat);
-$updateEtat->execute();
-}
+        $updateEtat = $this->createQueryBuilder('r')
+            ->update(Avis::class, 'r')
+            ->set('r.idrep', '?1')
+            ->where('r.idavis  = ?2')
+            ->setParameter(1, $idrep)
+            ->setParameter(2, $idavis)
+            ->getQuery();
+        dump($updateEtat);
+        $updateEtat->execute();
+    }
 
 
 

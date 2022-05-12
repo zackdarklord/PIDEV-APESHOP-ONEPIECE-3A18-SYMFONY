@@ -1,0 +1,83 @@
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Produit </h1>
+
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-8">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Remplir ce formulaire</h5>
+
+{{ form_start(form ,{ attr: {novalidate:'novalidate' } }) }}
+
+
+<div class="row mb-2">
+    <label class="col-sm-2 col-form-label" style="color: black;font-weight: bolder;text-align: left"><h4>Nom </h4></label>
+    <div class="col-sm-5">
+        {{ form_widget(form.nomproduit , { 'attr': {'class':'form-control' } }) }}
+        {{ form_errors(form.nomproduit, { 'attr': {'class':'text-danger' } }) }}
+    </div>
+</div>
+<div class="row mb-2">
+    <label class="col-sm-2 col-form-label" style="color: black;font-weight: bolder;text-align: left"><h4>Quantite</h4></label>
+    <div class="col-sm-5">
+        {{ form_widget(form.quantite, { 'attr': {'class':'form-control' } }) }}
+        {{ form_errors(form.quantite, { 'attr': {'class':'text-danger' } }) }}
+    </div>
+</div>
+<div class="row mb-2">
+    <label class="col-sm-2 col-form-label" style="color: black;font-weight: bolder;text-align: left"><h4>Prix</h4></label>
+    <div class="col-sm-5">
+        {{ form_widget(form.prixunitaire, { 'attr': {'class':'form-control' } }) }}
+        {{ form_errors(form.prixunitaire, { 'attr': {'class':'text-danger' } }) }}
+    </div>
+</div>
+<div class="row mb-2">
+    <label class="col-sm-2 col-form-label" style="color: black;font-weight: bolder;text-align: left"><h4>Categorie</h4></label>
+    <div class="col-sm-5">
+        {{ form_widget(form.nomcategorie, { 'attr': {'class':'form-select' } }) }}
+        {{ form_errors(form.nomcategorie, { 'attr': {'class':'text-danger' } }) }}
+    </div>
+</div>
+
+                    <div class="row mb-4">
+    <label class="col-sm-2 col-form-label" style="color: black;font-weight: bolder;text-align: left"><h4>Image</h4></label>
+    <div class="col-sm-5">
+        {{ form_widget(form.myFiles, { 'attr': {'class':'form-control' } }) }}
+        {{ form_errors(form.myFiles, { 'attr': {'class':'text-danger' } }) }}
+    </div>
+</div>
+
+
+
+<div class="row mb-3">
+    <label class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-1" style="color: black;font-weight: bolder">
+        <h1>
+            {{ form_widget(form.Sauvegarder, { 'attr': {'class':'btn btn-primary' } }) }}
+        </h1>
+    </div>
+</div>
+
+
+
+
+
+
+
+                        {{ form_end(form) }}
+            </div>
+
+        </div>
+
+
+        </div>  </div>
+    </section>
+
+</main><!-- End #main -->

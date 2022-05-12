@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Produits
@@ -32,6 +33,10 @@ class Produits
      * @var int
      *
      * @ORM\Column(name="quantite", type="integer", nullable=false)
+     * * @Assert\Range(
+     *   min=1,
+     *   max=30
+     * )
      */
     private $quantite;
 
@@ -39,6 +44,10 @@ class Produits
      * @var float
      *
      * @ORM\Column(name="prixUnitaire", type="float", precision=10, scale=0, nullable=false)
+     *  @Assert\Range(
+     *   min=10,
+     *   max=2000
+     * )
      */
     private $prixunitaire;
 
@@ -50,9 +59,7 @@ class Produits
     private $nomcategorie;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="image", type="blob", length=65535, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $image;
 
@@ -109,17 +116,22 @@ class Produits
         return $this;
     }
 
-    public function getImage()
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage($image): self
+    public function setImage(string $image): self
     {
         $this->image = $image;
 
         return $this;
     }
 
+public function __toString()
+{
+    // TODO: Implement __toString() method.
+    return $this->nomproduit;
+}
 
 }

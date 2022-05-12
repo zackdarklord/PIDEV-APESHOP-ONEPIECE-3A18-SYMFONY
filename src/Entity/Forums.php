@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Forums
  *
  * @ORM\Table(name="forums")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ForumsRepository")
  */
 class Forums
 {
@@ -28,10 +28,27 @@ class Forums
      */
     private $sujetforum;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateAjout", type="date", nullable=false)
+     */
+    private $dateajout;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=500, nullable=false)
+     */
+    private $description;
+
     public function getIdforum(): ?int
     {
         return $this->idforum;
     }
+
+
+
 
     public function getSujetforum(): ?string
     {
@@ -44,6 +61,39 @@ class Forums
 
         return $this;
     }
+
+    public function __toString()
+    {
+
+        return (string) $this->getSujetforum();
+
+    }
+
+    public function getDateajout(): ?\DateTimeInterface
+    {
+        return $this->dateajout;
+    }
+
+    public function setDateajout(\DateTimeInterface $dateajout): self
+    {
+        $this->dateajout = $dateajout;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+
 
 
 }

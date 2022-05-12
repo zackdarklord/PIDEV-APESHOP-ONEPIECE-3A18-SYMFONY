@@ -1,0 +1,22 @@
+{{ form_start(form) }}
+  {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+
+<!--formilaire commentaires -->
+<div class="row mb-3">
+    <div class="col-sm-10">
+        <label for="inputText" class="  col-sm-2 col-form-label"style="width: 20%;color: white" >commentaire</label>
+        <br>
+        {{ form_widget(form.idcommentaire,{ 'attr':{'class':'form-select'} }) }}
+        {{ form_errors(form.idcommentaire,{ 'attr':{'class':'danger-text'} }) }}
+
+        <label for="inputText" class="col-sm-2 col-form-label"style="width: 25%; color: white"> réponse</label>
+        <br>
+        {{ form_widget(form.contenureponse,{ 'attr':{'class':'form-control'} }) }}
+        {{ form_errors(form.contenureponse,{ 'attr':{'class':'danger-text'} }) }}
+
+
+    </div>
+</div>
+<button class="btn btn-primary">{{ button_label|default('ajouter') }}</button>
+
+{{ form_end(form) }}

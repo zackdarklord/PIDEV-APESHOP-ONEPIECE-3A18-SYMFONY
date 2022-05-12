@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <main id="main" class="main">
+
+
+
+
+        <h1 style="color: #0a53be">sujets du forum</h1>
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+
+                        <div class="card-body">
+
+
+                            <!-- Table with stripped rows -->
+
+
+                            <div class="dataTable-container">
+                                <table class="table datatable dataTable-table">
+
+                                    <thead>
+                                    <tr>
+
+
+
+                                        <th scope="col" data-sortable="" style="">
+                                            <a href="#" class="dataTable-sorter"><h5 style="color: #0a53be;font-weight: bolder">sujets</h5></a>
+                                        </th>
+                                        <th scope="col" data-sortable="" style="">
+                                            <a href="#" class="dataTable-sorter"><h5 style="color: #0a53be;font-weight: bolder">descriptions</h5></a>
+                                        </th>
+                                        <th scope="col" data-sortable="" style="">
+                                            <a href="#" class="dataTable-sorter"><h5 style="color: #0a53be;font-weight: bolder">date d'ajout</h5></a>
+                                        </th>
+                                        <th scope="col" data-sortable="" style="width: 2%;">
+
+                                        </th>
+                                        <th scope="col" data-sortable="" style="width: 2%;">
+
+                                        </th>
+
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for forum in forums %}
+                                        <tr>
+
+                                            <td>{{ forum.sujetforum }}</td>
+                                            <td>{{ forum.description }}</td>
+                                            <td>{{ forum.dateajout |date('d-m-Y') }}</td>
+
+                                            <td>
+
+                                                {{ include('forums/_delete_form.html.twig') }}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary" >  <a style="color: white" href="{{ path('app_forums_edit', {'idforum': forum.idforum}) }}">edit</a></button>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="3">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-primary" >    <a style="color: white" href="{{ path('app_forums_new') }}">Ajouter un forum</a> </button>
+
+                                <div class="search-bar" >
+                                    <form class="search-form d-flex align-items-center" action="{{ path('app_forums_index_1') }}" method="post">
+                                        <input style=""  type="text" name="query" placeholder="Recherche par sujet" title="Enter search keyword">
+                                        <button style=""  type="submit" title="Search"><i class="bi bi-search"></i></button>
+                                    </form >
+                                </div>
+<br><br>
+                            <!-- End Table with stripped rows -->
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+
+
+{% endblock %}

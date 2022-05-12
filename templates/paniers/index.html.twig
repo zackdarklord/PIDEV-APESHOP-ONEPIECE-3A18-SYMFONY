@@ -1,0 +1,142 @@
+ {% extends 'base-front.html.twig' %}
+
+
+{% block body %}
+    <!-- <h1>Mon Panier</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numeropanier</th>
+                <th>Quantite</th>
+                <th>Dateajout</th>
+                <th>numProduit</th>
+           {#     <th>nomProduit</th>#}
+                <th>numUtils</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for panier in paniers %}
+            <tr>
+                <td>{{ panier.numeropanier }}</td>
+                <td>{{ panier.quantite }}</td>
+                <td>{{ panier.dateajout ? panier.dateajout|date('Y-m-d') : '' }}</td>
+                <td>{{ panier.numeroproduit.numeroproduit }}</td>
+                {# <td>{{ panier.nomproduit.nomproduit}}</td>#}
+                <td>{{ panier.numeroUtilisateur.numeroutilisateurs}}</td>
+                <td>
+                    <a href="{{ path('app_paniers_show', {'numeropanier': panier.numeropanier}) }}">show</a>
+                    <a href="{{ path('app_paniers_edit', {'numeropanier': panier.numeropanier}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('app_paniers_new') }}">Create new</a> #}
+    -->
+    {% set total=0 %}
+<div class="card-body pb-0" style="padding-top: 20px">  </div>
+<div class="card-body pb-0"  >
+
+    <h1 style="color: #0a53be;padding-bottom: 20px;font-weight: bold;" class="card-title text-center">Mon panier <span>| {{ app.session.get ('username') }}</span></h1>
+
+    <table class="table datatable">
+        <thead>
+        <tr>
+
+            <th scope="col" style="color: #0a53be;font-size: 2em">Product</th>
+            <th scope="col" style="color: #0a53be;font-size: 2em">Prix</th>
+            <th scope="col" style="color: #0a53be;font-size: 2em">Quantité</th>
+            <th scope="col" style="color: #0a53be;font-size: 2em">Date d'ajout</th>
+            <th scope="col" style="color: #0a53be;font-size: 2em">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set total=0 %}
+        {% for panier in paniers %}
+            {% if app.session.get ('id_user') ==panier.numeroUtilisateur.numeroUtilisateurs %}
+            {% set total=total+(panier.quantite*panier.numeroproduit.prixunitaire) %}
+            <tr>
+
+                {# <td>{{ panier.numeropanier }}</td> #}
+                <td style="font-size: 1.2em">{{ panier.numeroproduit.nomproduit }}</td>
+                <td style="font-size: 1.2em">{{ panier.numeroproduit.prixunitaire }}</td>
+                <td style="font-size: 1.2em">{{ panier.quantite }}</td>
+                <td style="font-size: 1.2em">{{ panier.dateajout ? panier.dateajout|date('Y-m-d') : '' }}</td>
+                {# <td>{{ panier.numeroproduit.numeroproduit }}</td> #}
+                {# <td>{{ panier.nomproduit.nomproduit}}</td>#}
+               {#  <td>{{ panier.numeroUtilisateur.numeroutilisateurs}}</td>#}
+                <td style="font-size: 1em">
+
+                        {{ include('paniers/_delete_form.html.twig') }}
+                </td>
+            </tr>
+            {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="bi bi-info-circle me-1"></i>
+       votre Total: {{ total }} DT
+
+    </div>
+    {% if total !=  0 %}
+    <form action="{{ path('checkout',{'total':total}) }}" method="POST">
+        <button class="btn btn-primary" type="submit"style="margin-left: 1%">procéder au paiement<br><i class="bi bi-cash-coin"></i></button>
+        <a class="btn btn-primary" href="{{ path('app_commandes_newC') }}" style="margin-left: 1%">passer une commande<br><i class="bi bi-cash-coin"></i></a>
+
+    </form>
+
+    {% endif %}
+
+    <div class="card-body pb-0" style="padding-top: 100px;border-bottom: 1px solid black">  </div>
+    <div class="join-retro py-sm-5 py-4">
+        <div class="container py-xl-4 py-lg-2">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="join-agile text-left p-4">
+                        <div class="row">
+                            <div class="col-sm-7 offer-name">
+                                <h6>Game room</h6>
+                                <h4 class="mt-2 mb-3">PinBall machine</h4>
+                                <p>A partir de 2000d</p>
+                            </div>
+                            <div class="col-sm-5 offerimg-w3l">
+                                <img src="
+{{asset('front-office/images/pinball.jpg')}}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-lg-0 mt-5">
+                    <div class="join-agile text-left p-4">
+                        <div class="row ">
+                            <div class="col-sm-7 offer-name">
+                                <h6>SAGA games</h6>
+                                <h4 class="mt-2 mb-3">Street fighter 2</h4>
+                                <p>Presque gratuit juste 150d</p>
+                            </div>
+                            <div class="col-sm-5 offerimg-w3l">
+                                <img src="
+{{asset('front-office/images/retropup2.jpg')}}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

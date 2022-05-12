@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit client{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex align-center justify-content-center" style="padding-top: 100px">
+        {{ include('utilisateurs/_formU.html.twig', {'button_label': 'Update'}) }}
+    </div>
+<div class="d-flex align-center justify-content-center">
+    <a class="btn-primary w-auto align-center justify-content-center"style="margin-right: 50px"  href="{{ path('app_utilisateurs_index') }}">back to list</a>
+
+    {{ include('utilisateurs/_delete_form.html.twig') }}
+</div>
+
+
+
+{% endblock %}

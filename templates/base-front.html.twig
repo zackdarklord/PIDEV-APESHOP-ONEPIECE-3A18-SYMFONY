@@ -26,6 +26,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- //Meta tag Keywords -->
 
     <!-- Custom-Files -->
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
     <link href="{{asset('front-office/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all" />
     <!-- Bootstrap css -->
     <link href="{{asset('front-office/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
@@ -51,33 +52,47 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="agile-main-top">
     <div class="container-fluid">
         <div class="row main-top-w3l py-2">
-            <div class="col-lg-4 header-most-top">
-                <p class="text-white text-lg-left text-center">Offer Zone Top Deals & Discounts
-                    <i class="fas fa-shopping-cart ml-1"></i>
-                </p>
-            </div>
-            <div class="col-lg-8 header-right mt-lg-0 mt-2">
+
+            <div class="col-lg-12 header-right">
                 <!-- header lists -->
                 <ul>
                     <li class="text-center border-right text-white">
                         <a class="play-icon popup-with-zoom-anim text-white" href="#small-dialog1">
-                            <i class="fas fa-map-marker mr-2"></i>Select Location</a>
+                            <i class="fas fa-map-marker mr-2"></i>{% trans %}Select Location{% endtrans %}</a>
                     </li>
                     <li class="text-center border-right text-white">
                         <a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
-                            <i class="fas fa-truck mr-2"></i>Track Order</a>
+                            <i class="fas fa-truck mr-2"></i>{% trans %}Track Order{% endtrans %}</a>
                     </li>
                     <li class="text-center border-right text-white">
                         <i class="fas fa-phone mr-2"></i> 001 234 5678
                     </li>
-                    <li class="text-center border-right text-white">
-                        <a href="#" data-toggle="modal" data-target="#exampleModal3" class="text-white">
-                            <i class="fas fa-sign-in-alt mr-2"></i> Log In </a>
-                    </li>
-                    <li class="text-center text-white">
-                        <a href="#" data-toggle="modal" data-target="#exampleModal2" class="text-white">
-                            <i class="fas fa-sign-out-alt mr-2"></i>Register </a>
-                    </li>
+                    {% if app .session.get ('username') is  null %}
+                        <li class="text-center border-right text-white">
+                            <a href="{{ path('app_login_new') }} " class="text-white">
+                                <i class="fas fa-sign-in-alt mr-2"></i>{% trans%} Log In{% endtrans%} </a>
+                        </li>
+                        <li class="text-center text-white">
+                            <a href="{{ path('app_utilisateurs_new') }}" class="text-white">
+                                <i class="fas fa-sign-out-alt mr-2"></i>{% trans %}Register{% endtrans%} </a>
+                        </li>
+                    {% else %}
+                        <li class="text-center text-white border-right">
+                            <a href="{{ path('app_utilisateurs_profiler') }}" class="text-white">
+                                <i class="fas fa-user-circle mr-2"></i>{% trans %}show profile{% endtrans%} </a>
+                        </li>
+
+                        {% if app.session.get ('username') is not null %}
+                            <li class="text-center text-white ">
+                            welcome to Ape Shop :{{ app.session.get('username') }}!
+
+
+
+                                       <a  class="border-left" style="font-size: 20px;background-color: rgba(0,0,0,0);color: white;padding-left: 30px;"  onclick="logout()" href="{{ path('app_login_new') }}">{% trans%} log out{% endtrans %}</a>
+                            </li>
+                        {% endif %}
+
+                    {% endif %}
                 </ul>
                 <!-- //header lists -->
             </div>
@@ -89,7 +104,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div id="small-dialog1" class="mfp-hide">
     <div class="select-city">
         <h3>
-            <i class="fas fa-map-marker"></i> Please Select Your Location</h3>
+            <i class="fas fa-map-marker"></i>{% trans%} Please Select Your Location{% endtrans %}</h3>
         <select class="list_of_cities">
             <optgroup label="Popular Cities">
                 <option selected style="display:none;color:#eee;">Select City</option>
@@ -532,22 +547,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="col-10 agileits_search">
                         <form class="form-inline" action="#" method="post">
                             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required>
-                            <button class="btn my-2 my-sm-0" type="submit">Search</button>
+                            <button class="btn my-2 my-sm-0" type="submit">{% trans %}Search{% endtrans %}</button>
                         </form>
                     </div>
                     <!-- //search -->
                     <!-- cart details -->
-                    <div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
-                        <div class="wthreecartaits wthreecartaits2 cart cart box_1">
-                            <form action="#" method="post" class="last">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="display" value="1">
-                                <button class="btn w3view-cart" type="submit" name="submit" value="">
-                                    <i class="fas fa-cart-arrow-down"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+
+
+
+
                     <!-- //cart details -->
                 </div>
             </div>
@@ -560,199 +568,58 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="navbar-inner">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="agileits-navi_search">
-                <form action="#" method="post">
-                    <select id="agileinfo-nav_search" name="agileinfo_search" class="border" required="">
-                        <option value="">All Categories</option>
-                        <option value="Televisions">Televisions</option>
-                        <option value="Headphones">Headphones</option>
-                        <option value="Computers">Computers</option>
-                        <option value="Appliances">Appliances</option>
-                        <option value="Mobiles">Mobiles</option>
-                        <option value="Fruits &amp; Vegetables">Tv &amp; Video</option>
-                        <option value="iPad & Tablets">iPad & Tablets</option>
-                        <option value="Cameras & Camcorders">Cameras & Camcorders</option>
-                        <option value="Home Audio & Theater">Home Audio & Theater</option>
-                    </select>
-                </form>
-            </div>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto text-center mr-xl-5">
-                    <li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
-                        <a class="nav-link" href="index.html">Home
+                <ul class="navbar-nav ml-auto text-center mr-xl-8">
+                    <li class="nav-item active mr-lg-5 mb-lg-0 mb-2">
+                        <a class="nav-link"  href="{{ path('apeshop_home') }}">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Electronics
+                    <li class="nav-item dropdown mr-lg-5 mb-lg-0 mb-2">
+                        <a class="nav-link" href="{{ path('app_avis_indexFront') }}" role="button"  >
+                            Avis
                         </a>
-                        <div class="dropdown-menu">
-                            <div class="agile_inner_drop_nav_info p-4">
-                                <h5 class="mb-3">Mobiles, Computers</h5>
-                                <div class="row">
-                                    <div class="col-sm-6 multi-gd-img">
-                                        <ul class="multi-column-dropdown">
-                                            <li>
-                                                <a href="product.html">All Mobile Phones</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">All Mobile Accessories</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">Cases & Covers</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">Screen Protectors</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">Power Banks</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">All Certified Refurbished</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">Tablets</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">Wearable Devices</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">Smart Home</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-6 multi-gd-img">
-                                        <ul class="multi-column-dropdown">
-                                            <li>
-                                                <a href="product.html">Laptops</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">Drives & Storage</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">Printers & Ink</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">Networking Devices</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">Computer Accessories</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">Game Zone</a>
-                                            </li>
-                                            <li>
-                                                <a href="product.html">Software</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </li>
-                    <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Appliances
+                    <li class="nav-item dropdown mr-lg-5 mb-lg-0 mb-2">
+                        <a class="nav-link" href="{{ path('app_commentaires_index_front') }}" role="button"  >
+                            Forums
                         </a>
-                        <div class="dropdown-menu">
-                            <div class="agile_inner_drop_nav_info p-4">
-                                <h5 class="mb-3">TV, Appliances, Electronics</h5>
-                                <div class="row">
-                                    <div class="col-sm-6 multi-gd-img">
-                                        <ul class="multi-column-dropdown">
-                                            <li>
-                                                <a href="product2.html">Televisions</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">Home Entertainment Systems</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">Headphones</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">Speakers</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">MP3, Media Players & Accessories</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">Audio & Video Accessories</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">Cameras</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">DSLR Cameras</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">Camera Accessories</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-6 multi-gd-img">
-                                        <ul class="multi-column-dropdown">
-                                            <li>
-                                                <a href="product2.html">Musical Instruments</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">Gaming Consoles</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">All Electronics</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">Air Conditioners</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">Refrigerators</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">Washing Machines</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">Kitchen & Home Appliances</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">Heating & Cooling Appliances</a>
-                                            </li>
-                                            <li>
-                                                <a href="product2.html">All Appliances</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </li>
-                    <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-                        <a class="nav-link" href="about.html">About Us</a>
-                    </li>
-                    <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-                        <a class="nav-link" href="product.html">New Arrivals</a>
-                    </li>
-                    <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Pages
+
+                    <li class="nav-item dropdown mr-lg-5 mb-lg-0 mb-2">
+                        <a class="nav-link" href="{{ path('app_produits_front') }}" role="button"  >
+                            Produits
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="product.html">Product 1</a>
-                            <a class="dropdown-item" href="product2.html">Product 2</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="single.html">Single Product 1</a>
-                            <a class="dropdown-item" href="single2.html">Single Product 2</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="checkout.html">Checkout Page</a>
-                            <a class="dropdown-item" href="payment.html">Payment Page</a>
+
+                    </li>
+                    <li class="nav-item dropdown mr-lg-5 mb-lg-0 mb-2" style="padding-left: 80px">
+                        {% if app .session.get ('username') is not null %}
+
+                        <div class="wthreecartaits wthreecartaits2 cart cart box_1">
+                            <form action="{{ path('app_paniers_index') }}" method="get" class="last">
+
+                                <button class="btn w3view-cart" type="submit" name="submit" value="" >
+
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                </button>
+
+                            </form>
                         </div>
+
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
-                    </li>
+
+
+            {% endif %}
+
+
+
                 </ul>
             </div>
         </nav>
@@ -768,11 +635,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="footer-top-first">
         <div class="container py-md-5 py-sm-4 py-3">
             <!-- footer first section -->
-            <h2 class="footer-top-head-w3l font-weight-bold mb-2">Electronics :</h2>
+            <h2 class="footer-top-head-w3l font-weight-bold mb-2">{% trans %}Electronics{% endtrans%} :</h2>
             <p class="footer-main mb-4">
-                If you're considering a new laptop, looking for a powerful new car stereo or shopping for a new HDTV, we make it easy to
+               {% trans%} If you're considering a new laptop, looking for a powerful new car stereo or shopping for a new HDTV, we make it easy to
                 find exactly what you need at a price you can afford. We offer Every Day Low Prices on TVs, laptops, cell phones, tablets
-                and iPads, video games, desktop computers, cameras and camcorders, audio, video and more.</p>
+                and iPads, video games, desktop computers, cameras and camcorders, audio, video and more. {% endtrans %}</p>
             <!-- //footer first section -->
             <!-- footer second section -->
             <div class="row w3l-grids-footer border-top border-bottom py-sm-4 py-3">
@@ -782,7 +649,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <i class="fas fa-dolly"></i>
                         </div>
                         <div class="col-8 text-form-footer">
-                            <h3>Free Shipping</h3>
+                            <h3>{% trans %}Free Shipping{% endtrans %}</h3>
                             <p>on orders over $100</p>
                         </div>
                     </div>
@@ -793,7 +660,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <i class="fas fa-shipping-fast"></i>
                         </div>
                         <div class="col-8 text-form-footer">
-                            <h3>Fast Delivery</h3>
+                            <h3>{% trans %}Fast Delivery{% endtrans %}</h3>
                             <p>World Wide</p>
                         </div>
                     </div>
@@ -804,7 +671,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <i class="far fa-thumbs-up"></i>
                         </div>
                         <div class="col-8 text-form-footer">
-                            <h3>Big Choice</h3>
+                            <h3>{% trans %}Big Choice{% endtrans %}</h3>
                             <p>of Products</p>
                         </div>
                     </div>
@@ -852,6 +719,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <li class="mb-3">
                             <a href="contact.html">Contact Us</a>
                         </li>
+
                         <li class="mb-3">
                             <a href="help.html">Help</a>
                         </li>
@@ -1326,13 +1194,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         });
 
     });
+
 </script>
 <!-- //smooth-scrolling-of-move-up -->
 
+<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
 <!-- for bootstrap working -->
 <script src="
 {{asset('front-office/js/bootstrap.js')}}"></script>
 <!-- //for bootstrap working -->
 <!-- //js-files -->
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 </html>

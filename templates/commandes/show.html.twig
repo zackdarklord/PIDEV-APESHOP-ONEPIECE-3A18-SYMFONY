@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commandes{% endblock %}
+
+{% block body %}
+    <h1>Commandes</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Numerocommande</th>
+                <td>{{ commande.numerocommande }}</td>
+            </tr>
+            <tr>
+                <th>Datecreation</th>
+                <td>{{ commande.datecreation ? commande.datecreation|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Dateenvoi</th>
+                <td>{{ commande.dateenvoi ? commande.dateenvoi|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ commande.statut }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commandes_index') }}">back to list</a>
+
+    <a href="{{ path('app_commandes_edit', {'numerocommande': commande.numerocommande}) }}">edit</a>
+
+    {{ include('commandes/_delete_form.html.twig') }}
+{% endblock %}

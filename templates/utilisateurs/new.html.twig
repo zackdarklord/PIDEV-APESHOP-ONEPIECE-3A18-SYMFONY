@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Utilisateurs{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block body %}
+    <h1 style="padding-top: 100px"></h1>
+
+    {{ include('utilisateurs/_form.html.twig') }}
+
+    {#  <a style="display: flex;align-items: center;justify-content: center" href="{{ path('app_utilisateurs_index') }}">back to list</a>#}
+<div class="d-flex align-center justify-content-center">
+    <a class="btn-outline-primary"style="display: flex;align-items: center;justify-content: center" href="{{ path('apeshop_home') }}">back to home</a>
+</div>
+{% endblock %}

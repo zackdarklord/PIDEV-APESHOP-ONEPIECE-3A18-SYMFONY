@@ -1,0 +1,95 @@
+
+{#
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+#}
+
+<!--formilaire client-->
+<div style="display: flex;align-items: center;justify-content: center">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Formulaire Inscription Client</h5>
+
+            <!-- General Form Elements -->
+<div style="width: 600px">
+            {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">nom</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.nomclient,{ 'attr':{'class':'form-control'} }) }}
+                        {{ form_errors(form.nomclient,{ 'attr':{'class':'danger-text'} }) }}
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">adresse</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.adresse,{ 'attr':{'class':'form-control'} }) }}
+                        {{ form_errors(form.adresse,{ 'attr':{'class':'danger-textl'} }) }}
+                    </div>
+                </div>
+
+               {#  <div class="row mb-3">
+                    <label for="inputNumber" class="col-sm-2 col-form-label">num banq</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.infocartebancaire,{ 'attr':{'class':'form-control'} }) }}
+                        {{ form_errors(form.infocartebancaire,{ 'attr':{'class':'danger-text'} }) }}
+                    </div>
+                </div>
+               #}
+
+                <div class="row mb-3">
+                    <label for="inputNumber" class="col-sm-2 col-form-label">num Tel</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.numtel,{ 'attr':{'class':'form-control'} }) }}
+                        {{ form_errors(form.numtel,{ 'attr':{'class':'danger-text'} }) }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.email,{ 'attr':{'class':'form-control '} }) }}
+                        {{ form_errors(form.email,{ 'attr':{'class':'danger-text'} }) }}
+                    </div>
+
+                </div>
+
+    <div class="row mb-3">
+        <label for="inputImage" class="col-sm-2 col-form-label">image</label>
+        <div class="col-sm-10">
+            {{ form_widget(form.imageFile,{ 'attr':{'class':'form-control '} }) }}
+            {{ form_errors(form.imageFile,{ 'attr':{'class':'danger-text'} }) }}
+        </div>
+    </div>
+
+                <div class="row mb-3">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.motdepasse,{ 'attr':{'class':'form-control'} }) }}
+                        {{ form_errors(form.motdepasse,{ 'attr':{'class':'danger-text'} }) }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Submit Button</label>
+                    <div class="col-sm-10">
+                        <button class="btn btn-primary" onclick="signupp()" >{{ button_label|default('sign up') }}</button>
+                    </div>
+                </div>
+    <script>
+        function signupp() {
+            alert("sign in?");
+        }
+    </script>
+
+            {{ form_end(form) }}<!-- End General Form Elements -->
+</div>
+        </div>
+
+    </div>
+
+
+</div>
+

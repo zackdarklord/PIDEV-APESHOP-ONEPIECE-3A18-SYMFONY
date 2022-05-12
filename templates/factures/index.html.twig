@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Factures index{% endblock %}
+
+{% block body %}
+    <h1>Factures index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numerofacture</th>
+                <th>Typelivraison</th>
+                <th>Prixlivraison</th>
+                <th>Numeroregiondestinataire</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for facture in factures %}
+            <tr>
+                <td>{{ facture.numerofacture }}</td>
+                <td>{{ facture.typelivraison }}</td>
+                <td>{{ facture.prixlivraison }}</td>
+                <td>{{ facture.numeroregiondestinataire }}</td>
+                <td>
+                    <a href="{{ path('app_factures_show', {'numerofacture': facture.numerofacture}) }}">show</a>
+                    <a href="{{ path('app_factures_edit', {'numerofacture': facture.numerofacture}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_factures_new') }}">Create new</a>
+{% endblock %}

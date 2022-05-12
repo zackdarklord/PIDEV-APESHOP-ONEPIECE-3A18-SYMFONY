@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit client{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex align-center justify-content-center" style="padding-top: 100px">
+        {{ include('utilisateurs/_formU.html.twig', {'button_label': 'Update'}) }}
+
+    </div>
+    <div class="d-flex align-center justify-content-center">
+    <a class="btn-primary"   href="{{ path( 'app_utilisateurs_profiler') }}">return to profile</a>
+    </div>
+
+
+
+
+{% endblock %}

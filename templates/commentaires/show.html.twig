@@ -1,0 +1,29 @@
+
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <h1>Commentaires</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+                <th>sujet du forum</th>
+            {% for commentaire in commentaires %}
+            <td>{{ commentaire.idforum.sujetforum }}</td>
+        </tr>
+
+            <tr>
+                <th>Contenucommentaire</th>
+                <td>{{ commentaire.contenucommentaire }}</td>
+            </tr>
+
+
+{% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

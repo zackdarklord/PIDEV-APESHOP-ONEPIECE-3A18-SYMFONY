@@ -24,7 +24,7 @@ class AvisType extends AbstractType
         $builder
             ->add('contenuavis',TextareaType::class)
             ->add('idcategorie')
-            ->add('numeroutilisateur')
+            //->add('numeroutilisateur')
 
             ->add('dateajout',DateType::class, [
                 'attr' => [

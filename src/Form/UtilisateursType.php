@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Utilisateurs;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UtilisateursType extends AbstractType
 {
@@ -14,13 +16,15 @@ class UtilisateursType extends AbstractType
         $builder
             ->add('email')
             ->add('motdepasse')
-            ->add('dateinscription')
-            ->add('role')
+            //->add('dateinscription')
+            //->add('role')
             ->add('nomclient')
-            ->add('nomadmin')
+            //->add('nomadmin')
             ->add('adresse')
-            ->add('infocartebancaire')
+            //->add('infocartebancaire')
             ->add('numtel')
+            ->add('imageFile',VichImageType::class )
+
         ;
     }
 
@@ -30,4 +34,5 @@ class UtilisateursType extends AbstractType
             'data_class' => Utilisateurs::class,
         ]);
     }
+
 }

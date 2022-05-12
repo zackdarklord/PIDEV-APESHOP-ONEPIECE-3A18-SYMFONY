@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Commandes
  *
- * @ORM\Table(name="commandes", indexes={@ORM\Index(name="sk_user1", columns={"numeroUtilisateur"})})
+ * @ORM\Table(name="commandes", indexes={@ORM\Index(name="sk_user1", columns={"numeroUtilisateur"}), @ORM\Index(name="numeroProduit", columns={"numeroProduit"})})
  * @ORM\Entity
  */
 class Commandes
@@ -41,6 +41,16 @@ class Commandes
      * @ORM\Column(name="statut", type="string", length=30, nullable=false)
      */
     private $statut;
+
+    /**
+     * @var \Produits
+     *
+     * @ORM\ManyToOne(targetEntity="Produits")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numeroProduit", referencedColumnName="numeroProduit")
+     * })
+     */
+    private $numeroproduit;
 
     /**
      * @var \Utilisateurs
@@ -89,6 +99,18 @@ class Commandes
     public function setStatut(string $statut): self
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getNumeroproduit(): ?Produits
+    {
+        return $this->numeroproduit;
+    }
+
+    public function setNumeroproduit(?Produits $numeroproduit): self
+    {
+        $this->numeroproduit = $numeroproduit;
 
         return $this;
     }

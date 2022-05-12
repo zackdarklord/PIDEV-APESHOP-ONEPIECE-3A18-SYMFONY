@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="pagetitle">
+
+<h1>Produits</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Numeroproduit</th>
+                <td>{{ produit.numeroproduit }}</td>
+            </tr>
+            <tr>
+                <th>Nomproduit</th>
+                <td>{{ produit.nomproduit }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ produit.quantite }}</td>
+            </tr>
+            <tr>
+                <th>Prixunitaire</th>
+                <td>{{ produit.prixunitaire }}</td>
+            </tr>
+            <tr>
+                <th>Nomcategorie</th>
+                <td>{{ produit.nomcategorie }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+<div>
+    {{ include('produits/_delete_form.html.twig') }}
+</div>
+    <div>
+
+    <a class="btn btn-outline-primary" href="{{ path('app_produits_index') }}">back to list</a>
+</div>
+</div><!-- End Page Title -->
+
+{% endblock %}

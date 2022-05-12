@@ -1,0 +1,45 @@
+{% extends 'base_front.html.twig' %}
+
+
+
+{% block body %}
+
+
+    <h1>Commentaires index</h1>
+<table class="table datatable dataTable-table">
+
+    <thead>
+        <tr>
+            <th>sujet du forum</th>
+            <th>commentaires </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for commentaire in commentaires %}
+            {% for forum in forums %}
+            {% if commentaire.idforum.sujetforum == forum.sujetforum %}
+            <tr>
+                <td>{{ commentaire.idforum.sujetforum}}</td>
+                 <td>{{ commentaire.contenucommentaire}}</td>
+                <a href="{{ path('app_commentaires_show', {'idcommentaire': commentaire.idcommentaire}) }}">accéder</a>
+                <td>
+
+
+                </td>
+
+            </tr>
+
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+</table>
+
+    <a href="{{ path('app_forums_index_front') }}">forum</a>
+
+{% endblock %}
