@@ -1,0 +1,176 @@
+<?php
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Extension\SandboxExtension;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedTagError;
+use Twig\Sandbox\SecurityNotAllowedFilterError;
+use Twig\Sandbox\SecurityNotAllowedFunctionError;
+use Twig\Source;
+use Twig\Template;
+
+/* Back/assets/vendor/apexcharts/locales/sk.json */
+class __TwigTemplate_7d4622b87395bfd16e8a76fef67d6427 extends Template
+{
+    private $source;
+    private $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->parent = false;
+
+        $this->blocks = [
+        ];
+    }
+
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "Back/assets/vendor/apexcharts/locales/sk.json"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "Back/assets/vendor/apexcharts/locales/sk.json"));
+
+        // line 1
+        echo "{
+  \"name\": \"sk\",
+  \"options\": {
+    \"months\": [
+      \"Január\",
+      \"Február\",
+      \"Marec\",
+      \"Apríl\",
+      \"Máj\",
+      \"Jún\",
+      \"Júl\",
+      \"August\",
+      \"September\",
+      \"Október\",
+      \"November\",
+      \"December\"
+    ],
+    \"shortMonths\": [
+      \"Jan\",
+      \"Feb\",
+      \"Mar\",
+      \"Apr\",
+      \"Máj\",
+      \"Jún\",
+      \"Júl\",
+      \"Aug\",
+      \"Sep\",
+      \"Okt\",
+      \"Nov\",
+      \"Dec\"
+    ],
+    \"days\": [
+      \"Nedeľa\",
+      \"Pondelok\",
+      \"Utorok\",
+      \"Streda\",
+      \"Štvrtok\",
+      \"Piatok\",
+      \"Sobota\"
+    ],
+    \"shortDays\": [\"Ne\", \"Po\", \"Ut\", \"St\", \"Št\", \"Pi\", \"So\"],
+    \"toolbar\": {
+      \"exportToSVG\": \"Stiahnuť SVG\",
+      \"exportToPNG\": \"Stiahnuť PNG\",
+      \"exportToCSV\": \"Stiahnuť CSV\",
+      \"menu\": \"Menu\",
+      \"selection\": \"Vyberanie\",
+      \"selectionZoom\": \"Zoom: Vyberanie\",
+      \"zoomIn\": \"Zoom: Priblížiť\",
+      \"zoomOut\": \"Zoom: Vzdialiť\",
+      \"pan\": \"Presúvanie\",
+      \"reset\": \"Resetovať\"
+    }
+  }
+}
+";
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+    }
+
+    public function getTemplateName()
+    {
+        return "Back/assets/vendor/apexcharts/locales/sk.json";
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("{
+  \"name\": \"sk\",
+  \"options\": {
+    \"months\": [
+      \"Január\",
+      \"Február\",
+      \"Marec\",
+      \"Apríl\",
+      \"Máj\",
+      \"Jún\",
+      \"Júl\",
+      \"August\",
+      \"September\",
+      \"Október\",
+      \"November\",
+      \"December\"
+    ],
+    \"shortMonths\": [
+      \"Jan\",
+      \"Feb\",
+      \"Mar\",
+      \"Apr\",
+      \"Máj\",
+      \"Jún\",
+      \"Júl\",
+      \"Aug\",
+      \"Sep\",
+      \"Okt\",
+      \"Nov\",
+      \"Dec\"
+    ],
+    \"days\": [
+      \"Nedeľa\",
+      \"Pondelok\",
+      \"Utorok\",
+      \"Streda\",
+      \"Štvrtok\",
+      \"Piatok\",
+      \"Sobota\"
+    ],
+    \"shortDays\": [\"Ne\", \"Po\", \"Ut\", \"St\", \"Št\", \"Pi\", \"So\"],
+    \"toolbar\": {
+      \"exportToSVG\": \"Stiahnuť SVG\",
+      \"exportToPNG\": \"Stiahnuť PNG\",
+      \"exportToCSV\": \"Stiahnuť CSV\",
+      \"menu\": \"Menu\",
+      \"selection\": \"Vyberanie\",
+      \"selectionZoom\": \"Zoom: Vyberanie\",
+      \"zoomIn\": \"Zoom: Priblížiť\",
+      \"zoomOut\": \"Zoom: Vzdialiť\",
+      \"pan\": \"Presúvanie\",
+      \"reset\": \"Resetovať\"
+    }
+  }
+}
+", "Back/assets/vendor/apexcharts/locales/sk.json", "C:\\symfony\\website-skeleton\\templates\\Back\\assets\\vendor\\apexcharts\\locales\\sk.json");
+    }
+}
